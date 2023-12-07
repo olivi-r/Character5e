@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="character5e"
+    targetNamespace="character5e" elementFormDefault="qualified">
+    <xs:attributeGroup name="source">
+        <xs:attribute name="source">
+            <xs:simpleType>
+                <xs:list>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ua" />
+                            <xs:enumeration value="basic" />
+                            <xs:enumeration value="phb" />
+                            <xs:enumeration value="dmg" />
+                            <xs:enumeration value="mm" />
+                            <!-- Extend with other valid book codes -->
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:list>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+
+    <xs:complexType name="stat">
+        <xs:simpleContent>
+            <xs:extension base="xs:integer">
+                <xs:attribute type="xs:integer" name="base" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="skill">
+        <xs:attribute type="xs:boolean" use="required" name="proficient" />
+    </xs:complexType>
+
+    <xs:element name="player">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="details">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element type="xs:string" name="name" />
+                            <xs:element type="xs:string" name="gender" />
+                            <xs:element name="alignment">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Lawful Good" />
+                                        <xs:enumeration value="Lawful Neutral" />
+                                        <xs:enumeration value="Lawful Evil" />
+                                        <xs:enumeration value="Neutral Good" />
+                                        <xs:enumeration value="True Neutral" />
+                                        <xs:enumeration value="Neutral Evil" />
+                                        <xs:enumeration value="Chaotic Good" />
+                                        <xs:enumeration value="Chaotic Neutral" />
+                                        <xs:enumeration value="Chaotic Evil" />
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element type="xs:integer" name="experience" />
+                            <xs:element name="background">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attributeGroup ref="source" />
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="money">
+                                <xs:complexType>
+                                    <xs:attribute type="xs:integer" name="cp" />
+                                    <xs:attribute type="xs:integer" name="sp" />
+                                    <xs:attribute type="xs:integer" name="ep" />
+                                    <xs:attribute type="xs:integer" name="gp" />
+                                    <xs:attribute type="xs:integer" name="pp" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="race">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element name="subrace">
+                                <xs:complexType>
+                                    <xs:attribute type="xs:string" name="name" />
+                                    <xs:attributeGroup ref="source" />
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="height" />
+                            <xs:element name="weight" />
+                            <xs:element type="xs:integer" name="age" />
+                            <xs:element name="score-increase">
+                                <xs:complexType>
+                                    <xs:attribute type="xs:integer" name="str" />
+                                    <xs:attribute type="xs:integer" name="dex" />
+                                    <xs:attribute type="xs:integer" name="con" />
+                                    <xs:attribute type="xs:integer" name="int" />
+                                    <xs:attribute type="xs:integer" name="wis" />
+                                    <xs:attribute type="xs:integer" name="cha" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:all>
+                        <xs:attribute type="xs:string" name="name" />
+                        <xs:attributeGroup ref="source" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ability">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element type="stat" name="str" />
+                            <xs:element type="stat" name="dex" />
+                            <xs:element type="stat" name="con" />
+                            <xs:element type="stat" name="int" />
+                            <xs:element type="stat" name="wis" />
+                            <xs:element type="stat" name="cha" />
+                        </xs:all>
+                        <xs:attribute name="saving-throws">
+                            <xs:simpleType>
+                                <xs:list>
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:enumeration value="str" />
+                                            <xs:enumeration value="dex" />
+                                            <xs:enumeration value="con" />
+                                            <xs:enumeration value="int" />
+                                            <xs:enumeration value="wis" />
+                                            <xs:enumeration value="cha" />
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:list>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="skills">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element type="skill" name="acrobatics" />
+                            <xs:element type="skill" name="animal-handling" />
+                            <xs:element type="skill" name="arcana" />
+                            <xs:element type="skill" name="athletics" />
+                            <xs:element type="skill" name="deception" />
+                            <xs:element type="skill" name="history" />
+                            <xs:element type="skill" name="insight" />
+                            <xs:element type="skill" name="intimidation" />
+                            <xs:element type="skill" name="investigation" />
+                            <xs:element type="skill" name="medicine" />
+                            <xs:element type="skill" name="nature" />
+                            <xs:element type="skill" name="perception" />
+                            <xs:element type="skill" name="performance" />
+                            <xs:element type="skill" name="persuasion" />
+                            <xs:element type="skill" name="religion" />
+                            <xs:element type="skill" name="sleight-of-hand" />
+                            <xs:element type="skill" name="stealth" />
+                            <xs:element type="skill" name="survival" />
+                        </xs:all>
+                        <xs:attribute type="xs:boolean" name="jack-of-all-trades" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="classlist">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="class" minOccurs="1" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="level" />
+                                        <xs:element name="subclass" />
+                                    </xs:all>
+                                    <xs:attributeGroup ref="source" />
+                                    <xs:attribute type="xs:string" name="name" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="characteristics">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:choice>
+                                <xs:element type="xs:string" name="trait" />
+                                <xs:element type="xs:string" name="ideal" />
+                                <xs:element type="xs:string" name="bond" />
+                                <xs:element type="xs:string" name="flaw" />
+                            </xs:choice>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
