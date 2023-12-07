@@ -20,14 +20,6 @@
         </xs:attribute>
     </xs:attributeGroup>
 
-    <xs:complexType name="stat">
-        <xs:simpleContent>
-            <xs:extension base="xs:integer">
-                <xs:attribute type="xs:integer" name="base" />
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
-
     <xs:complexType name="skill">
         <xs:attribute type="xs:boolean" use="required" name="proficient" />
         <xs:attribute type="xs:boolean" use="required" name="expertise" />
@@ -108,12 +100,12 @@
                 <xs:element name="ability">
                     <xs:complexType>
                         <xs:all>
-                            <xs:element type="stat" name="str" />
-                            <xs:element type="stat" name="dex" />
-                            <xs:element type="stat" name="con" />
-                            <xs:element type="stat" name="int" />
-                            <xs:element type="stat" name="wis" />
-                            <xs:element type="stat" name="cha" />
+                            <xs:element type="xs:integer" name="str" />
+                            <xs:element type="xs:integer" name="dex" />
+                            <xs:element type="xs:integer" name="con" />
+                            <xs:element type="xs:integer" name="int" />
+                            <xs:element type="xs:integer" name="wis" />
+                            <xs:element type="xs:integer" name="cha" />
                         </xs:all>
                         <xs:attribute name="saving-throws">
                             <xs:simpleType>
