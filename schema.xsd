@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="character5e"
-    targetNamespace="character5e" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://github.com/olivi-r/Character5e/raw/main/schema.xsd"
+    xmlns:ns="http://github.com/olivi-r/Character5e/raw/main/schema.xsd"
+    elementFormDefault="qualified">
     <xs:attributeGroup name="source">
         <xs:attribute name="source">
             <xs:simpleType>
@@ -53,7 +55,7 @@
                                 <xs:complexType>
                                     <xs:simpleContent>
                                         <xs:extension base="xs:string">
-                                            <xs:attributeGroup ref="source" />
+                                            <xs:attributeGroup ref="ns:source" />
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -76,7 +78,7 @@
                             <xs:element name="subrace">
                                 <xs:complexType>
                                     <xs:attribute type="xs:string" name="name" />
-                                    <xs:attributeGroup ref="source" />
+                                    <xs:attributeGroup ref="ns:source" />
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="height" />
@@ -94,7 +96,7 @@
                             </xs:element>
                         </xs:all>
                         <xs:attribute type="xs:string" name="name" />
-                        <xs:attributeGroup ref="source" />
+                        <xs:attributeGroup ref="ns:source" />
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="ability">
@@ -128,24 +130,24 @@
                 <xs:element name="skills">
                     <xs:complexType>
                         <xs:all>
-                            <xs:element type="skill" name="acrobatics" />
-                            <xs:element type="skill" name="animal-handling" />
-                            <xs:element type="skill" name="arcana" />
-                            <xs:element type="skill" name="athletics" />
-                            <xs:element type="skill" name="deception" />
-                            <xs:element type="skill" name="history" />
-                            <xs:element type="skill" name="insight" />
-                            <xs:element type="skill" name="intimidation" />
-                            <xs:element type="skill" name="investigation" />
-                            <xs:element type="skill" name="medicine" />
-                            <xs:element type="skill" name="nature" />
-                            <xs:element type="skill" name="perception" />
-                            <xs:element type="skill" name="performance" />
-                            <xs:element type="skill" name="persuasion" />
-                            <xs:element type="skill" name="religion" />
-                            <xs:element type="skill" name="sleight-of-hand" />
-                            <xs:element type="skill" name="stealth" />
-                            <xs:element type="skill" name="survival" />
+                            <xs:element type="ns:skill" name="acrobatics" />
+                            <xs:element type="ns:skill" name="animal-handling" />
+                            <xs:element type="ns:skill" name="arcana" />
+                            <xs:element type="ns:skill" name="athletics" />
+                            <xs:element type="ns:skill" name="deception" />
+                            <xs:element type="ns:skill" name="history" />
+                            <xs:element type="ns:skill" name="insight" />
+                            <xs:element type="ns:skill" name="intimidation" />
+                            <xs:element type="ns:skill" name="investigation" />
+                            <xs:element type="ns:skill" name="medicine" />
+                            <xs:element type="ns:skill" name="nature" />
+                            <xs:element type="ns:skill" name="perception" />
+                            <xs:element type="ns:skill" name="performance" />
+                            <xs:element type="ns:skill" name="persuasion" />
+                            <xs:element type="ns:skill" name="religion" />
+                            <xs:element type="ns:skill" name="sleight-of-hand" />
+                            <xs:element type="ns:skill" name="stealth" />
+                            <xs:element type="ns:skill" name="survival" />
                         </xs:all>
                         <xs:attribute type="xs:boolean" name="jack-of-all-trades" />
                     </xs:complexType>
@@ -159,7 +161,7 @@
                                         <xs:element name="level" />
                                         <xs:element name="subclass" />
                                     </xs:all>
-                                    <xs:attributeGroup ref="source" />
+                                    <xs:attributeGroup ref="ns:source" />
                                     <xs:attribute type="xs:string" name="name" />
                                 </xs:complexType>
                             </xs:element>
