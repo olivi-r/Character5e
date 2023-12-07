@@ -30,6 +30,7 @@
 
     <xs:complexType name="skill">
         <xs:attribute type="xs:boolean" use="required" name="proficient" />
+        <xs:attribute type="xs:boolean" use="required" name="expertise" />
     </xs:complexType>
 
     <xs:element name="player">
