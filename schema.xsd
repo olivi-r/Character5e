@@ -70,16 +70,17 @@
                 <xs:element name="race">
                     <xs:complexType>
                         <xs:all>
-                            <xs:element name="subrace">
+                            <xs:element type="xs:integer" name="age" />
+                            <xs:element type="xs:integer" name="speed" />
+                            <xs:element type="xs:string" name="height" />
+                            <xs:element type="xs:integer" name="weight" />
+                            <xs:element name="subrace" minOccurs="0">
                                 <xs:complexType>
                                     <xs:attribute type="xs:string" name="name" />
                                     <xs:attributeGroup ref="ns:source" />
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="height" />
-                            <xs:element name="weight" />
-                            <xs:element type="xs:integer" name="age" />
-                            <xs:element name="score-increase">
+                            <xs:element name="score-increase" minOccurs="0">
                                 <xs:complexType>
                                     <xs:attribute type="xs:integer" name="str" />
                                     <xs:attribute type="xs:integer" name="dex" />
@@ -153,8 +154,13 @@
                             <xs:element name="class" minOccurs="1" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:all>
-                                        <xs:element name="level" />
-                                        <xs:element name="subclass" />
+                                        <xs:element type="xs:integer" name="level" />
+                                        <xs:element name="subclass">
+                                            <xs:complexType>
+                                                <xs:attribute type="xs:string" name="name" />
+                                                <xs:attributeGroup ref="ns:source" />
+                                            </xs:complexType>
+                                        </xs:element>
                                     </xs:all>
                                     <xs:attributeGroup ref="ns:source" />
                                     <xs:attribute type="xs:string" name="name" />
