@@ -83,6 +83,7 @@
         <xs:simpleContent>
             <xs:extension base="xs:string">
                 <xs:attribute type="xs:string" use="required" name="name" />
+                <xs:attribute type="ns:fromType" use="required" name="from" />
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -107,6 +108,7 @@
             <xs:element type="ns:classListType" name="classlist" />
             <xs:element type="ns:characteristicsType" name="characteristics" minOccurs="0" />
             <xs:element type="ns:proficienciesType" name="proficiencies" minOccurs="0" />
+            <xs:element type="ns:featuresType" name="features" />
         </xs:all>
     </xs:complexType>
     <xs:complexType name="proficienciesType">
@@ -114,6 +116,7 @@
             <xs:choice minOccurs="0" maxOccurs="unbounded">
                 <xs:element type="xs:string" name="language" />
                 <xs:element type="ns:armorType" name="armor" />
+                <xs:element type="xs:string" name="other" />
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -126,7 +129,6 @@
             <xs:element type="ns:sizeType" name="size" />
             <xs:element type="xs:integer" name="weight" />
             <xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
-            <xs:element type="ns:featuresType" name="features" />
             <xs:element type="ns:subraceType" name="subrace" minOccurs="0" />
         </xs:all>
         <xs:attributeGroup ref="ns:sourceAttr" />
@@ -189,7 +191,6 @@
     <xs:complexType name="subraceType">
         <xs:all>
             <xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
-            <xs:element type="ns:featuresType" name="features" />
         </xs:all>
         <xs:attributeGroup ref="ns:sourceAttr" />
     </xs:complexType>
@@ -236,6 +237,11 @@
             <xs:enumeration value="Chain Mail" />
             <xs:enumeration value="Splint" />
             <xs:enumeration value="Plate" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="fromType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="race(:subrace)?|class:\d+(:subclass)?@(20|1[0-9]|[1-9])" />
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="hitDiceType">
