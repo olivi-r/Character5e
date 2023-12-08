@@ -15,8 +15,8 @@
         <xs:attribute type="xs:string" use="required" name="name" />
     </xs:attributeGroup>
     <xs:complexType name="skill">
-        <xs:attribute type="xs:boolean" use="required" name="proficient" />
-        <xs:attribute type="xs:boolean" use="required" name="expertise" />
+        <xs:attribute type="xs:boolean" name="proficient" />
+        <xs:attribute type="xs:boolean" name="expertise" />
     </xs:complexType>
     <xs:complexType name="spells">
         <xs:sequence>
