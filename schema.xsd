@@ -4,20 +4,15 @@
     xmlns:ns="http://github.com/olivi-r/Character5e/raw/main/schema.xsd"
     elementFormDefault="qualified">
     <xs:attributeGroup name="source">
-        <xs:attribute name="source">
+        <xs:attribute name="source" use="required">
             <xs:simpleType>
-                <xs:list>
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="ua" />
-                            <xs:enumeration value="basic" />
-                            <xs:enumeration value="phb" />
-                            <xs:enumeration value="dmg" />
-                            <xs:enumeration value="mm" />
-                            <!-- Extend with other valid book codes -->
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:list>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ua" />
+                    <xs:enumeration value="basic" />
+                    <xs:enumeration value="phb" />
+                    <xs:enumeration value="dmg" />
+                    <xs:enumeration value="mm" />
+                </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
     </xs:attributeGroup>
