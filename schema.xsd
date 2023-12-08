@@ -1,10 +1,7 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://github.com/olivi-r/Character5e/raw/main/schema.xsd"
-    xmlns:ns="http://github.com/olivi-r/Character5e/raw/main/schema.xsd"
-    elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://github.com/olivi-r/Character5e/raw/main/schema.xsd" xmlns:ns="http://github.com/olivi-r/Character5e/raw/main/schema.xsd" elementFormDefault="qualified">
     <xs:attributeGroup name="source">
-        <xs:attribute name="source" use="required">
+        <xs:attribute use="required" name="source">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="ua" />
@@ -15,13 +12,69 @@
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
+        <xs:attribute type="xs:string" use="required" name="name" />
     </xs:attributeGroup>
-
     <xs:complexType name="skill">
         <xs:attribute type="xs:boolean" use="required" name="proficient" />
         <xs:attribute type="xs:boolean" use="required" name="expertise" />
     </xs:complexType>
-
+    <xs:complexType name="spells">
+        <xs:sequence>
+            <xs:element name="spell" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="components" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element type="xs:string" name="component" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element type="xs:string" name="description" />
+                        <xs:element type="xs:string" name="higher-levels" minOccurs="0" />
+                    </xs:all>
+                    <xs:attributeGroup ref="ns:source" />
+                    <xs:attribute use="required" name="level">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="cantrip" />
+                                <xs:enumeration value="1" />
+                                <xs:enumeration value="2" />
+                                <xs:enumeration value="3" />
+                                <xs:enumeration value="4" />
+                                <xs:enumeration value="5" />
+                                <xs:enumeration value="6" />
+                                <xs:enumeration value="7" />
+                                <xs:enumeration value="8" />
+                                <xs:enumeration value="9" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute use="required" name="school">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="abjuration" />
+                                <xs:enumeration value="conjuration" />
+                                <xs:enumeration value="divination" />
+                                <xs:enumeration value="enchantment" />
+                                <xs:enumeration value="evocation" />
+                                <xs:enumeration value="illusion" />
+                                <xs:enumeration value="necromancy" />
+                                <xs:enumeration value="transmutation" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute type="xs:boolean" name="ritual" />
+                    <xs:attribute type="xs:string" use="required" name="casting-time" />
+                    <xs:attribute type="xs:string" use="required" name="range" />
+                    <xs:attribute type="xs:boolean" name="verbal" />
+                    <xs:attribute type="xs:boolean" name="somatic" />
+                    <xs:attribute type="xs:boolean" name="concentration" />
+                    <xs:attribute type="xs:string" use="required" name="duration" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
     <xs:element name="player">
         <xs:complexType>
             <xs:all>
@@ -76,7 +129,6 @@
                             <xs:element type="xs:integer" name="weight" />
                             <xs:element name="subrace" minOccurs="0">
                                 <xs:complexType>
-                                    <xs:attribute type="xs:string" name="name" />
                                     <xs:attributeGroup ref="ns:source" />
                                 </xs:complexType>
                             </xs:element>
@@ -91,7 +143,6 @@
                                 </xs:complexType>
                             </xs:element>
                         </xs:all>
-                        <xs:attribute type="xs:string" name="name" />
                         <xs:attributeGroup ref="ns:source" />
                     </xs:complexType>
                 </xs:element>
@@ -157,13 +208,15 @@
                                         <xs:element type="xs:integer" name="level" />
                                         <xs:element name="subclass">
                                             <xs:complexType>
-                                                <xs:attribute type="xs:string" name="name" />
+                                                <xs:all>
+                                                    <xs:element type="ns:spells" name="spells" minOccurs="0" />
+                                                </xs:all>
                                                 <xs:attributeGroup ref="ns:source" />
                                             </xs:complexType>
                                         </xs:element>
+                                        <xs:element type="ns:spells" name="spells" minOccurs="0" />
                                     </xs:all>
                                     <xs:attributeGroup ref="ns:source" />
-                                    <xs:attribute type="xs:string" name="name" />
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
