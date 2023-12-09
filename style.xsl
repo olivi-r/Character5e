@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:stylesheet version="1.0" xmlns:xs="http://www.w3.org/1999/XSL/Transform">
     <xs:param name="cssPath" />
-    <xs:template xmlns:ns="http://github.com/olivi-r/Character5e/raw/main/schema.xsd" match="/ns:player">
+    <xs:template xmlns:ns="http://github.com/olivi-r/characters/raw/main/schema.xsd" match="/ns:player">
         <xs:variable name="playerLevel" select="sum(ns:classlist/ns:class/@level)" />
         <xs:variable name="proficiencyBonus" select="floor(($playerLevel - 1) div 4) + 2" />
         <xs:variable name="str" select="floor(ns:ability/ns:str div 2) - 5" />
