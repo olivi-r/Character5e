@@ -69,7 +69,7 @@
     <xs:complexType name="detailsType">
         <xs:all>
             <xs:element type="xs:string" name="name" />
-            <xs:element type="xs:string" name="gender" />
+            <xs:element type="xs:string" name="gender" minOccurs="0" />
             <xs:element type="ns:alignmentType" name="alignment" />
             <xs:element type="xs:integer" name="experience" />
             <xs:element type="ns:backgroundType" name="background" />
