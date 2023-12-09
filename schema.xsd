@@ -305,6 +305,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="sourceType">
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="ua" />
 			<xs:enumeration value="basic" />
 			<xs:enumeration value="phb" />
 			<xs:enumeration value="dmg" />
