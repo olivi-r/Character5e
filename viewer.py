@@ -13,7 +13,7 @@ def resource(path):
         return os.path.abspath(path)
 
 
-xslt = ET.parse(resource("basic.xsl"))
+xslt = ET.parse(resource("style.xsl"))
 transformed = ET.XSLT(xslt)(ET.parse(sys.argv[1]))
 
 with open(resource("style.css")) as fp:
