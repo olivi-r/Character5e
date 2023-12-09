@@ -15,10 +15,6 @@ def resource(path):
 
 xslt = ET.parse(resource("style.xsl"))
 transformed = ET.XSLT(xslt)(ET.parse(sys.argv[1]))
-
-with open(resource("style.css")) as fp:
-    transformed.getroot().xpath("/html/head/style")[0].text = fp.read()
-
 generated = ET.tostring(transformed, pretty_print=True).decode("utf-8")
 webview.create_window("Character Sheet", html=generated)
 webview.start()

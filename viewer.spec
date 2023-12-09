@@ -5,7 +5,7 @@ a = Analysis(
     ['viewer.py'],
     pathex=[],
     binaries=[],
-    datas=[('basic.xsl', '.'), ('style.css', '.')],
+    datas=[('style.xsl', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

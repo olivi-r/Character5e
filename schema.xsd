@@ -1,314 +1,314 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://github.com/olivi-r/characters/raw/main/schema.xsd" xmlns:ns="http://github.com/olivi-r/characters/raw/main/schema.xsd" elementFormDefault="qualified">
-    <xs:attributeGroup name="sourceAttr">
-        <xs:attribute type="ns:sourceType" use="required" name="source" />
-        <xs:attribute type="xs:string" use="required" name="name" />
-    </xs:attributeGroup>
-    <xs:complexType name="abilityScoreIncreaseType">
-        <xs:attribute type="xs:integer" name="str" />
-        <xs:attribute type="xs:integer" name="dex" />
-        <xs:attribute type="xs:integer" name="con" />
-        <xs:attribute type="xs:integer" name="int" />
-        <xs:attribute type="xs:integer" name="wis" />
-        <xs:attribute type="xs:integer" name="cha" />
-    </xs:complexType>
-    <xs:complexType name="abilityType">
-        <xs:all>
-            <xs:element type="ns:abilityValueType" name="str" />
-            <xs:element type="ns:abilityValueType" name="dex" />
-            <xs:element type="ns:abilityValueType" name="con" />
-            <xs:element type="ns:abilityValueType" name="int" />
-            <xs:element type="ns:abilityValueType" name="wis" />
-            <xs:element type="ns:abilityValueType" name="cha" />
-        </xs:all>
-        <xs:attribute type="ns:savingThrowsType" name="saving-throws" />
-    </xs:complexType>
-    <xs:complexType name="backgroundType">
-        <xs:attributeGroup ref="ns:sourceAttr" />
-    </xs:complexType>
-    <xs:complexType name="characteristicsType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-            <xs:choice>
-                <xs:element type="xs:string" name="trait" />
-                <xs:element type="xs:string" name="ideal" />
-                <xs:element type="xs:string" name="bond" />
-                <xs:element type="xs:string" name="flaw" />
-            </xs:choice>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="classListType">
-        <xs:sequence>
-            <xs:element type="ns:classType" name="class" minOccurs="1" maxOccurs="unbounded" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="classType">
-        <xs:all>
-            <xs:element type="ns:subclassType" name="subclass" minOccurs="0" />
-            <xs:element type="ns:spellsType" name="spells" minOccurs="0" />
-        </xs:all>
-        <xs:attributeGroup ref="ns:sourceAttr" />
-        <xs:attribute type="ns:levelValueType" use="required" name="level" />
-        <xs:attribute type="xs:positiveInteger" use="required" name="hit-base" />
-        <xs:attribute type="ns:hitDiceType" use="required" name="hit-dice" />
-        <xs:attribute type="xs:positiveInteger" use="required" name="hit-fixed" />
-        <xs:attribute type="ns:modListType" name="hit-mod" />
-        <xs:attribute type="ns:modListType" name="spell-mod"></xs:attribute>
-    </xs:complexType>
-    <xs:complexType name="componentType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="price" />
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
-    <xs:complexType name="componenetsType">
-        <xs:sequence>
-            <xs:element type="ns:componentType" name="component" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="detailsType">
-        <xs:all>
-            <xs:element type="xs:string" name="name" />
-            <xs:element type="xs:string" name="gender" minOccurs="0" />
-            <xs:element type="ns:alignmentType" name="alignment" />
-            <xs:element type="xs:integer" name="experience" />
-            <xs:element type="ns:backgroundType" name="background" />
-            <xs:element type="ns:moneyType" name="money" minOccurs="0" />
-            <xs:element type="xs:nonNegativeInteger" name="hp" />
-            <xs:element type="ns:equippedArmorType" name="equipped-armor" minOccurs="0" />
-            <xs:element type="xs:boolean" name="equipped-shield" minOccurs="0" />
-        </xs:all>
-    </xs:complexType>
-    <xs:complexType name="featureType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" use="required" name="name" />
-                <xs:attribute type="ns:fromType" use="required" name="from" />
-            </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
-    <xs:complexType name="featuresType">
-        <xs:sequence>
-            <xs:element type="ns:featureType" name="feature" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="moneyType">
-        <xs:attribute type="xs:nonNegativeInteger" name="cp" />
-        <xs:attribute type="xs:nonNegativeInteger" name="sp" />
-        <xs:attribute type="xs:nonNegativeInteger" name="ep" />
-        <xs:attribute type="xs:nonNegativeInteger" name="gp" />
-        <xs:attribute type="xs:nonNegativeInteger" name="pp" />
-    </xs:complexType>
-    <xs:complexType name="playerType">
-        <xs:all>
-            <xs:element type="ns:detailsType" name="details" />
-            <xs:element type="ns:raceType" name="race" />
-            <xs:element type="ns:abilityType" name="ability" />
-            <xs:element type="ns:skillsType" name="skills" minOccurs="0" />
-            <xs:element type="ns:classListType" name="classlist" />
-            <xs:element type="ns:characteristicsType" name="characteristics" minOccurs="0" />
-            <xs:element type="ns:proficienciesType" name="proficiencies" minOccurs="0" />
-            <xs:element type="ns:featuresType" name="features" />
-        </xs:all>
-    </xs:complexType>
-    <xs:complexType name="proficienciesType">
-        <xs:sequence>
-            <xs:choice minOccurs="0" maxOccurs="unbounded">
-                <xs:element type="xs:string" name="language" />
-                <xs:element type="ns:armorType" name="armor" />
-                <xs:element type="xs:string" name="other" />
-            </xs:choice>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="raceType">
-        <xs:all>
-            <xs:element type="xs:string" name="creature-type" />
-            <xs:element type="xs:nonNegativeInteger" name="age" />
-            <xs:element type="xs:positiveInteger" name="speed" />
-            <xs:element type="xs:string" name="height" />
-            <xs:element type="ns:sizeType" name="size" />
-            <xs:element type="xs:integer" name="weight" />
-            <xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
-            <xs:element type="ns:subraceType" name="subrace" minOccurs="0" />
-        </xs:all>
-        <xs:attributeGroup ref="ns:sourceAttr" />
-    </xs:complexType>
-    <xs:complexType name="skillType">
-        <xs:attribute type="xs:boolean" name="proficient" />
-        <xs:attribute type="xs:boolean" name="expertise" />
-    </xs:complexType>
-    <xs:complexType name="skillsType">
-        <xs:all>
-            <xs:element type="ns:skillType" name="acrobatics" minOccurs="0" />
-            <xs:element type="ns:skillType" name="animal-handling" minOccurs="0" />
-            <xs:element type="ns:skillType" name="arcana" minOccurs="0" />
-            <xs:element type="ns:skillType" name="athletics" minOccurs="0" />
-            <xs:element type="ns:skillType" name="deception" minOccurs="0" />
-            <xs:element type="ns:skillType" name="history" minOccurs="0" />
-            <xs:element type="ns:skillType" name="insight" minOccurs="0" />
-            <xs:element type="ns:skillType" name="intimidation" minOccurs="0" />
-            <xs:element type="ns:skillType" name="investigation" minOccurs="0" />
-            <xs:element type="ns:skillType" name="medicine" minOccurs="0" />
-            <xs:element type="ns:skillType" name="nature" minOccurs="0" />
-            <xs:element type="ns:skillType" name="perception" minOccurs="0" />
-            <xs:element type="ns:skillType" name="performance" minOccurs="0" />
-            <xs:element type="ns:skillType" name="persuasion" minOccurs="0" />
-            <xs:element type="ns:skillType" name="religion" minOccurs="0" />
-            <xs:element type="ns:skillType" name="sleight-of-hand" minOccurs="0" />
-            <xs:element type="ns:skillType" name="stealth" minOccurs="0" />
-            <xs:element type="ns:skillType" name="survival" minOccurs="0" />
-        </xs:all>
-        <xs:attribute type="xs:boolean" name="jack-of-all-trades" />
-    </xs:complexType>
-    <xs:complexType name="spellType">
-        <xs:all>
-            <xs:element type="ns:componenetsType" name="components" minOccurs="0" />
-            <xs:element type="xs:string" name="description" />
-            <xs:element type="xs:string" name="higher-levels" minOccurs="0" />
-        </xs:all>
-        <xs:attributeGroup ref="ns:sourceAttr" />
-        <xs:attribute type="ns:levelType" use="required" name="level" />
-        <xs:attribute type="ns:schoolType" use="required" name="school" />
-        <xs:attribute type="xs:boolean" name="ritual" />
-        <xs:attribute type="xs:string" use="required" name="casting-time" />
-        <xs:attribute type="xs:string" use="required" name="range" />
-        <xs:attribute type="xs:boolean" name="verbal" />
-        <xs:attribute type="xs:boolean" name="somatic" />
-        <xs:attribute type="xs:boolean" name="concentration" />
-        <xs:attribute type="xs:string" use="required" name="duration" />
-    </xs:complexType>
-    <xs:complexType name="spellsType">
-        <xs:sequence>
-            <xs:element type="ns:spellType" name="spell" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="subclassType">
-        <xs:all>
-            <xs:element type="ns:spellsType" name="spells" minOccurs="0" />
-        </xs:all>
-        <xs:attributeGroup ref="ns:sourceAttr" />
-    </xs:complexType>
-    <xs:complexType name="subraceType">
-        <xs:all>
-            <xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
-        </xs:all>
-        <xs:attributeGroup ref="ns:sourceAttr" />
-    </xs:complexType>
-    <xs:element type="ns:playerType" name="player" />
-    <xs:simpleType name="abilityValueType">
-        <xs:restriction base="xs:positiveInteger">
-            <xs:maxExclusive value="31" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="alignmentType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Lawful Good" />
-            <xs:enumeration value="Lawful Neutral" />
-            <xs:enumeration value="Lawful Evil" />
-            <xs:enumeration value="Neutral Good" />
-            <xs:enumeration value="True Neutral" />
-            <xs:enumeration value="Neutral Evil" />
-            <xs:enumeration value="Chaotic Good" />
-            <xs:enumeration value="Chaotic Neutral" />
-            <xs:enumeration value="Chaotic Evil" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="armorType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="light" />
-            <xs:enumeration value="medium" />
-            <xs:enumeration value="heavy" />
-            <xs:enumeration value="shield" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="equippedArmorType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="None" />
-            <xs:enumeration value="Padded" />
-            <xs:enumeration value="Leather" />
-            <xs:enumeration value="Studded Leather" />
-            <xs:enumeration value="Hide" />
-            <xs:enumeration value="Chain Shirt" />
-            <xs:enumeration value="Scale Mail" />
-            <xs:enumeration value="Spiked Armor" />
-            <xs:enumeration value="Breastplate" />
-            <xs:enumeration value="Halfplate" />
-            <xs:enumeration value="Ring Mail" />
-            <xs:enumeration value="Chain Mail" />
-            <xs:enumeration value="Splint" />
-            <xs:enumeration value="Plate" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="fromType">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="race(:subrace)?|class:\d+(:subclass)?@(20|1[0-9]|[1-9])" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="hitDiceType">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="d(4|6|8|10|12|20)" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="levelType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="cantrip" />
-            <xs:enumeration value="1" />
-            <xs:enumeration value="2" />
-            <xs:enumeration value="3" />
-            <xs:enumeration value="4" />
-            <xs:enumeration value="5" />
-            <xs:enumeration value="6" />
-            <xs:enumeration value="7" />
-            <xs:enumeration value="8" />
-            <xs:enumeration value="9" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="levelValueType">
-        <xs:restriction base="xs:positiveInteger">
-            <xs:maxExclusive value="21" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="modListType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="str" />
-            <xs:enumeration value="dex" />
-            <xs:enumeration value="con" />
-            <xs:enumeration value="int" />
-            <xs:enumeration value="wis" />
-            <xs:enumeration value="cha" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="savingThrowsType">
-        <xs:list itemType="ns:modListType" />
-    </xs:simpleType>
-    <xs:simpleType name="schoolType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="abjuration" />
-            <xs:enumeration value="conjuration" />
-            <xs:enumeration value="divination" />
-            <xs:enumeration value="enchantment" />
-            <xs:enumeration value="evocation" />
-            <xs:enumeration value="illusion" />
-            <xs:enumeration value="necromancy" />
-            <xs:enumeration value="transmutation" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="sizeType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="tiny" />
-            <xs:enumeration value="small" />
-            <xs:enumeration value="medium" />
-            <xs:enumeration value="large" />
-            <xs:enumeration value="huge" />
-            <xs:enumeration value="gargantuan" />
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:simpleType name="sourceType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="basic" />
-            <xs:enumeration value="phb" />
-            <xs:enumeration value="dmg" />
-            <xs:enumeration value="mm" />
-        </xs:restriction>
-    </xs:simpleType>
+	<xs:attributeGroup name="sourceAttr">
+		<xs:attribute type="ns:sourceType" use="required" name="source" />
+		<xs:attribute type="xs:string" use="required" name="name" />
+	</xs:attributeGroup>
+	<xs:complexType name="abilityScoreIncreaseType">
+		<xs:attribute type="xs:integer" name="str" />
+		<xs:attribute type="xs:integer" name="dex" />
+		<xs:attribute type="xs:integer" name="con" />
+		<xs:attribute type="xs:integer" name="int" />
+		<xs:attribute type="xs:integer" name="wis" />
+		<xs:attribute type="xs:integer" name="cha" />
+	</xs:complexType>
+	<xs:complexType name="abilityType">
+		<xs:all>
+			<xs:element type="ns:abilityValueType" name="str" />
+			<xs:element type="ns:abilityValueType" name="dex" />
+			<xs:element type="ns:abilityValueType" name="con" />
+			<xs:element type="ns:abilityValueType" name="int" />
+			<xs:element type="ns:abilityValueType" name="wis" />
+			<xs:element type="ns:abilityValueType" name="cha" />
+		</xs:all>
+		<xs:attribute type="ns:savingThrowsType" name="saving-throws" />
+	</xs:complexType>
+	<xs:complexType name="backgroundType">
+		<xs:attributeGroup ref="ns:sourceAttr" />
+	</xs:complexType>
+	<xs:complexType name="characteristicsType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:choice>
+				<xs:element type="xs:string" name="trait" />
+				<xs:element type="xs:string" name="ideal" />
+				<xs:element type="xs:string" name="bond" />
+				<xs:element type="xs:string" name="flaw" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="classListType">
+		<xs:sequence>
+			<xs:element type="ns:classType" name="class" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="classType">
+		<xs:all>
+			<xs:element type="ns:subclassType" name="subclass" minOccurs="0" />
+			<xs:element type="ns:spellsType" name="spells" minOccurs="0" />
+		</xs:all>
+		<xs:attributeGroup ref="ns:sourceAttr" />
+		<xs:attribute type="ns:levelValueType" use="required" name="level" />
+		<xs:attribute type="xs:positiveInteger" use="required" name="hit-base" />
+		<xs:attribute type="ns:hitDiceType" use="required" name="hit-dice" />
+		<xs:attribute type="xs:positiveInteger" use="required" name="hit-fixed" />
+		<xs:attribute type="ns:modListType" name="hit-mod" />
+		<xs:attribute type="ns:modListType" name="spell-mod"></xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="componentType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" name="price" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="componenetsType">
+		<xs:sequence>
+			<xs:element type="ns:componentType" name="component" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="detailsType">
+		<xs:all>
+			<xs:element type="xs:string" name="name" />
+			<xs:element type="xs:string" name="gender" minOccurs="0" />
+			<xs:element type="ns:alignmentType" name="alignment" />
+			<xs:element type="xs:integer" name="experience" />
+			<xs:element type="ns:backgroundType" name="background" />
+			<xs:element type="ns:moneyType" name="money" minOccurs="0" />
+			<xs:element type="xs:nonNegativeInteger" name="hp" />
+			<xs:element type="ns:equippedArmorType" name="equipped-armor" minOccurs="0" />
+			<xs:element type="xs:boolean" name="equipped-shield" minOccurs="0" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="featureType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:string" use="required" name="name" />
+				<xs:attribute type="ns:fromType" use="required" name="from" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="featuresType">
+		<xs:sequence>
+			<xs:element type="ns:featureType" name="feature" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="moneyType">
+		<xs:attribute type="xs:nonNegativeInteger" name="cp" />
+		<xs:attribute type="xs:nonNegativeInteger" name="sp" />
+		<xs:attribute type="xs:nonNegativeInteger" name="ep" />
+		<xs:attribute type="xs:nonNegativeInteger" name="gp" />
+		<xs:attribute type="xs:nonNegativeInteger" name="pp" />
+	</xs:complexType>
+	<xs:complexType name="playerType">
+		<xs:all>
+			<xs:element type="ns:detailsType" name="details" />
+			<xs:element type="ns:raceType" name="race" />
+			<xs:element type="ns:abilityType" name="ability" />
+			<xs:element type="ns:skillsType" name="skills" minOccurs="0" />
+			<xs:element type="ns:classListType" name="classlist" />
+			<xs:element type="ns:characteristicsType" name="characteristics" minOccurs="0" />
+			<xs:element type="ns:proficienciesType" name="proficiencies" minOccurs="0" />
+			<xs:element type="ns:featuresType" name="features" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="proficienciesType">
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element type="xs:string" name="language" />
+				<xs:element type="ns:armorType" name="armor" />
+				<xs:element type="xs:string" name="other" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="raceType">
+		<xs:all>
+			<xs:element type="xs:string" name="creature-type" />
+			<xs:element type="xs:nonNegativeInteger" name="age" />
+			<xs:element type="xs:positiveInteger" name="speed" />
+			<xs:element type="xs:string" name="height" />
+			<xs:element type="ns:sizeType" name="size" />
+			<xs:element type="xs:integer" name="weight" />
+			<xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
+			<xs:element type="ns:subraceType" name="subrace" minOccurs="0" />
+		</xs:all>
+		<xs:attributeGroup ref="ns:sourceAttr" />
+	</xs:complexType>
+	<xs:complexType name="skillType">
+		<xs:attribute type="xs:boolean" name="proficient" />
+		<xs:attribute type="xs:boolean" name="expertise" />
+	</xs:complexType>
+	<xs:complexType name="skillsType">
+		<xs:all>
+			<xs:element type="ns:skillType" name="acrobatics" minOccurs="0" />
+			<xs:element type="ns:skillType" name="animal-handling" minOccurs="0" />
+			<xs:element type="ns:skillType" name="arcana" minOccurs="0" />
+			<xs:element type="ns:skillType" name="athletics" minOccurs="0" />
+			<xs:element type="ns:skillType" name="deception" minOccurs="0" />
+			<xs:element type="ns:skillType" name="history" minOccurs="0" />
+			<xs:element type="ns:skillType" name="insight" minOccurs="0" />
+			<xs:element type="ns:skillType" name="intimidation" minOccurs="0" />
+			<xs:element type="ns:skillType" name="investigation" minOccurs="0" />
+			<xs:element type="ns:skillType" name="medicine" minOccurs="0" />
+			<xs:element type="ns:skillType" name="nature" minOccurs="0" />
+			<xs:element type="ns:skillType" name="perception" minOccurs="0" />
+			<xs:element type="ns:skillType" name="performance" minOccurs="0" />
+			<xs:element type="ns:skillType" name="persuasion" minOccurs="0" />
+			<xs:element type="ns:skillType" name="religion" minOccurs="0" />
+			<xs:element type="ns:skillType" name="sleight-of-hand" minOccurs="0" />
+			<xs:element type="ns:skillType" name="stealth" minOccurs="0" />
+			<xs:element type="ns:skillType" name="survival" minOccurs="0" />
+		</xs:all>
+		<xs:attribute type="xs:boolean" name="jack-of-all-trades" />
+	</xs:complexType>
+	<xs:complexType name="spellType">
+		<xs:all>
+			<xs:element type="ns:componenetsType" name="components" minOccurs="0" />
+			<xs:element type="xs:string" name="description" />
+			<xs:element type="xs:string" name="higher-levels" minOccurs="0" />
+		</xs:all>
+		<xs:attributeGroup ref="ns:sourceAttr" />
+		<xs:attribute type="ns:levelType" use="required" name="level" />
+		<xs:attribute type="ns:schoolType" use="required" name="school" />
+		<xs:attribute type="xs:boolean" name="ritual" />
+		<xs:attribute type="xs:string" use="required" name="casting-time" />
+		<xs:attribute type="xs:string" use="required" name="range" />
+		<xs:attribute type="xs:boolean" name="verbal" />
+		<xs:attribute type="xs:boolean" name="somatic" />
+		<xs:attribute type="xs:boolean" name="concentration" />
+		<xs:attribute type="xs:string" use="required" name="duration" />
+	</xs:complexType>
+	<xs:complexType name="spellsType">
+		<xs:sequence>
+			<xs:element type="ns:spellType" name="spell" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="subclassType">
+		<xs:all>
+			<xs:element type="ns:spellsType" name="spells" minOccurs="0" />
+		</xs:all>
+		<xs:attributeGroup ref="ns:sourceAttr" />
+	</xs:complexType>
+	<xs:complexType name="subraceType">
+		<xs:all>
+			<xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
+		</xs:all>
+		<xs:attributeGroup ref="ns:sourceAttr" />
+	</xs:complexType>
+	<xs:element type="ns:playerType" name="player" />
+	<xs:simpleType name="abilityValueType">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:maxExclusive value="31" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alignmentType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Lawful Good" />
+			<xs:enumeration value="Lawful Neutral" />
+			<xs:enumeration value="Lawful Evil" />
+			<xs:enumeration value="Neutral Good" />
+			<xs:enumeration value="True Neutral" />
+			<xs:enumeration value="Neutral Evil" />
+			<xs:enumeration value="Chaotic Good" />
+			<xs:enumeration value="Chaotic Neutral" />
+			<xs:enumeration value="Chaotic Evil" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="armorType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="light" />
+			<xs:enumeration value="medium" />
+			<xs:enumeration value="heavy" />
+			<xs:enumeration value="shield" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="equippedArmorType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="None" />
+			<xs:enumeration value="Padded" />
+			<xs:enumeration value="Leather" />
+			<xs:enumeration value="Studded Leather" />
+			<xs:enumeration value="Hide" />
+			<xs:enumeration value="Chain Shirt" />
+			<xs:enumeration value="Scale Mail" />
+			<xs:enumeration value="Spiked Armor" />
+			<xs:enumeration value="Breastplate" />
+			<xs:enumeration value="Halfplate" />
+			<xs:enumeration value="Ring Mail" />
+			<xs:enumeration value="Chain Mail" />
+			<xs:enumeration value="Splint" />
+			<xs:enumeration value="Plate" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fromType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="race(:subrace)?|class:\d+(:subclass)?@(20|1[0-9]|[1-9])" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="hitDiceType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="d(4|6|8|10|12|20)" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="levelType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="cantrip" />
+			<xs:enumeration value="1" />
+			<xs:enumeration value="2" />
+			<xs:enumeration value="3" />
+			<xs:enumeration value="4" />
+			<xs:enumeration value="5" />
+			<xs:enumeration value="6" />
+			<xs:enumeration value="7" />
+			<xs:enumeration value="8" />
+			<xs:enumeration value="9" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="levelValueType">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:maxExclusive value="21" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="modListType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="str" />
+			<xs:enumeration value="dex" />
+			<xs:enumeration value="con" />
+			<xs:enumeration value="int" />
+			<xs:enumeration value="wis" />
+			<xs:enumeration value="cha" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="savingThrowsType">
+		<xs:list itemType="ns:modListType" />
+	</xs:simpleType>
+	<xs:simpleType name="schoolType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="abjuration" />
+			<xs:enumeration value="conjuration" />
+			<xs:enumeration value="divination" />
+			<xs:enumeration value="enchantment" />
+			<xs:enumeration value="evocation" />
+			<xs:enumeration value="illusion" />
+			<xs:enumeration value="necromancy" />
+			<xs:enumeration value="transmutation" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sizeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="tiny" />
+			<xs:enumeration value="small" />
+			<xs:enumeration value="medium" />
+			<xs:enumeration value="large" />
+			<xs:enumeration value="huge" />
+			<xs:enumeration value="gargantuan" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sourceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="basic" />
+			<xs:enumeration value="phb" />
+			<xs:enumeration value="dmg" />
+			<xs:enumeration value="mm" />
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>
