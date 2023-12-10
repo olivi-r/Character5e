@@ -292,7 +292,7 @@
 	<xs:complexType name="characterType">
 		<xs:annotation>
 			<xs:documentation>Root of character information</xs:documentation>
-			<xs:documentation>Elements: details (required), race (required), ability (required), skills, classlist (required), characteristics, proficiencies, features (required)</xs:documentation>
+			<xs:documentation>Elements: details (required), race (required), ability (required), skills, classlist (required), characteristics, proficiencies, features</xs:documentation>
 		</xs:annotation>
 		<xs:all>
 			<xs:element type="detailsType" name="details" />
@@ -302,7 +302,7 @@
 			<xs:element type="classListType" name="classlist" />
 			<xs:element type="characteristicsType" name="characteristics" minOccurs="0" />
 			<xs:element type="proficienciesType" name="proficiencies" minOccurs="0" />
-			<xs:element type="featuresType" name="features" />
+			<xs:element type="featuresType" name="features" minOccurs="0" />
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="proficienciesType">
