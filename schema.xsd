@@ -319,6 +319,8 @@
 					</xs:annotation>
 				</xs:element>
 				<xs:element type="armorType" name="armor" />
+				<xs:element type="weaponType" name="weapon" />
+				<xs:element type="weaponCategoryType" name="weapon-category" />
 				<xs:element type="xs:string" name="other">
 					<xs:annotation>
 						<xs:documentation>A proficiency that may not fall into other categories</xs:documentation>
@@ -689,6 +691,63 @@
 			<xs:enumeration value="phb" />
 			<xs:enumeration value="dmg" />
 			<xs:enumeration value="mm" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="weaponCategoryType">
+		<xs:annotation>
+			<xs:documentation>A proficiency in a weapon category</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "simple", and "martial"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="simple" />
+			<xs:enumeration value="martial" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="weaponType">
+		<xs:annotation>
+			<xs:documentation>A proficiency in a weapon</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Hammer", "Mace", "Quaterstaff", "Sickle", "Spear", "Light Crossbow", "Dart", "Shortbow", "Sling", "Battleaxe", "Flail", "Glaive", "Greataxe", "Greatsword", "Halberd", "Lance", "Longsword", "Maul", "Morningstar", "Pike", "Rapier", "Scimitar", "Shortsword", "Trident", "War Pick", "Warhammer", "Whip", "Blowgun", "Hand Crossbow", "Heavy Crossbow", "Longbow", and "Net"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Club" />
+			<xs:enumeration value="Dagger" />
+			<xs:enumeration value="Greatclub" />
+			<xs:enumeration value="Handaxe" />
+			<xs:enumeration value="Javelin" />
+			<xs:enumeration value="Light Hammer" />
+			<xs:enumeration value="Mace" />
+			<xs:enumeration value="Quaterstaff" />
+			<xs:enumeration value="Sickle" />
+			<xs:enumeration value="Spear" />
+			<xs:enumeration value="Light Crossbow" />
+			<xs:enumeration value="Dart" />
+			<xs:enumeration value="Shortbow" />
+			<xs:enumeration value="Sling" />
+			<xs:enumeration value="Battleaxe" />
+			<xs:enumeration value="Flail" />
+			<xs:enumeration value="Glaive" />
+			<xs:enumeration value="Greataxe" />
+			<xs:enumeration value="Greatsword" />
+			<xs:enumeration value="Halberd" />
+			<xs:enumeration value="Lance" />
+			<xs:enumeration value="Longsword" />
+			<xs:enumeration value="Maul" />
+			<xs:enumeration value="Morningstar" />
+			<xs:enumeration value="Pike" />
+			<xs:enumeration value="Rapier" />
+			<xs:enumeration value="Scimitar" />
+			<xs:enumeration value="Shortsword" />
+			<xs:enumeration value="Trident" />
+			<xs:enumeration value="War Pick" />
+			<xs:enumeration value="Warhammer" />
+			<xs:enumeration value="Whip" />
+			<xs:enumeration value="Blowgun" />
+			<xs:enumeration value="Hand Crossbow" />
+			<xs:enumeration value="Heavy Crossbow" />
+			<xs:enumeration value="Longbow" />
+			<xs:enumeration value="Net" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
