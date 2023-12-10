@@ -166,7 +166,7 @@
 	<xs:complexType name="detailsType">
 		<xs:annotation>
 			<xs:documentation>Character details</xs:documentation>
-			<xs:documentation>Elements: name (required), gender, experience (required), background (required), hp-max (required), hp (required), temp-hp, alignment, money, equipped-armor, equipped-shield</xs:documentation>
+			<xs:documentation>Elements: name (required), gender, experience (required), background (required), hp-max (required), hp (required), temp-hp, money, equipped-armor, equipped-shield</xs:documentation>
 		</xs:annotation>
 		<xs:all>
 			<xs:element type="xs:string" name="name">
@@ -210,7 +210,6 @@
 					<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element type="alignmentType" name="alignment" minOccurs="0" />
 			<xs:element type="moneyType" name="money" minOccurs="0" />
 			<xs:element type="equippedArmorType" name="equipped-armor" minOccurs="0" />
 			<xs:element type="xs:boolean" name="equipped-shield" minOccurs="0">
@@ -333,15 +332,9 @@
 	<xs:complexType name="raceType">
 		<xs:annotation>
 			<xs:documentation>Character race details</xs:documentation>
-			<xs:documentation>Elements: creature-type (required), speed (required), size (required) subrace, ability-score-increase, age, height, weight</xs:documentation>
+			<xs:documentation>Elements: speed (required), size (required) subrace, ability-score-increase, creature-type, alignment, age, height, weight</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element type="xs:string" name="creature-type">
-				<xs:annotation>
-					<xs:documentation>Type of creature character is</xs:documentation>
-					<xs:documentation>Type: string</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element type="xs:positiveInteger" name="speed">
 				<xs:annotation>
 					<xs:documentation>Movement speed of character (in feet)</xs:documentation>
@@ -352,6 +345,13 @@
 			<xs:element type="sizeType" name="size" />
 			<xs:element type="subraceType" name="subrace" minOccurs="0" />
 			<xs:element type="abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
+			<xs:element type="xs:string" name="creature-type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of creature character is</xs:documentation>
+					<xs:documentation>Type: string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="alignmentType" name="alignment" minOccurs="0" />
 			<xs:element type="xs:positiveInteger" name="age" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Age of character</xs:documentation>
