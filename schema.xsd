@@ -2,17 +2,60 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://github.com/olivi-r/characters/raw/main/schema.xsd" xmlns:ns="http://github.com/olivi-r/characters/raw/main/schema.xsd" elementFormDefault="qualified">
 	<xs:attributeGroup name="sourceAttr">
 		<xs:attribute type="ns:sourceType" use="required" name="source" />
-		<xs:attribute type="xs:string" use="required" name="name" />
+		<xs:attribute type="xs:string" use="required" name="name">
+			<xs:annotation>
+				<xs:documentation>Name of sourced material</xs:documentation>
+				<xs:documentation>Type: string</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:attributeGroup>
 	<xs:complexType name="abilityScoreIncreaseType">
-		<xs:attribute type="xs:integer" name="str" />
-		<xs:attribute type="xs:integer" name="dex" />
-		<xs:attribute type="xs:integer" name="con" />
-		<xs:attribute type="xs:integer" name="int" />
-		<xs:attribute type="xs:integer" name="wis" />
-		<xs:attribute type="xs:integer" name="cha" />
+		<xs:annotation>
+			<xs:documentation>Values to be added to the base ability score</xs:documentation>
+		</xs:annotation>
+		<xs:attribute type="xs:integer" name="str">
+			<xs:annotation>
+				<xs:documentation>Strength score increase</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:integer" name="dex">
+			<xs:annotation>
+				<xs:documentation>Dexterity score increase</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:integer" name="con">
+			<xs:annotation>
+				<xs:documentation>Constitution score increase</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:integer" name="int">
+			<xs:annotation>
+				<xs:documentation>Intelligence score increase</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:integer" name="wis">
+			<xs:annotation>
+				<xs:documentation>Wisdom score increase</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:integer" name="cha">
+			<xs:annotation>
+				<xs:documentation>Charisma score increase</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="abilityType">
+		<xs:annotation>
+			<xs:documentation>Abilities for character</xs:documentation>
+			<xs:documentation>Elements: str (required), dex (required), con (required), int (required), wis (required), cha (required)</xs:documentation>
+			<xs:documentation>Attributes: saving-throws</xs:documentation>
+		</xs:annotation>
 		<xs:all>
 			<xs:element type="ns:abilityValueType" name="str" />
 			<xs:element type="ns:abilityValueType" name="dex" />
@@ -24,82 +67,233 @@
 		<xs:attribute type="ns:savingThrowsType" name="saving-throws" />
 	</xs:complexType>
 	<xs:complexType name="backgroundType">
+		<xs:annotation>
+			<xs:documentation>Character background</xs:documentation>
+			<xs:documentation>Attributes: source (required), name (required)</xs:documentation>
+		</xs:annotation>
 		<xs:attributeGroup ref="ns:sourceAttr" />
 	</xs:complexType>
 	<xs:complexType name="characteristicsType">
+		<xs:annotation>
+			<xs:documentation>Traits, ideals, bonds and flaws of character</xs:documentation>
+			<xs:documentation>Elements: trait &#8805; 0, ideal &#8805; 0, bond &#8805; 0, flaw &#8805; 0</xs:documentation>
+		</xs:annotation>
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
 			<xs:choice>
-				<xs:element type="xs:string" name="trait" />
-				<xs:element type="xs:string" name="ideal" />
-				<xs:element type="xs:string" name="bond" />
-				<xs:element type="xs:string" name="flaw" />
+				<xs:element type="xs:string" name="trait">
+					<xs:annotation>
+						<xs:documentation>Character trait</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element type="xs:string" name="ideal">
+					<xs:annotation>
+						<xs:documentation>Character ideal</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element type="xs:string" name="bond">
+					<xs:annotation>
+						<xs:documentation>Character bond</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element type="xs:string" name="flaw">
+					<xs:annotation>
+						<xs:documentation>Character flaw</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="classListType">
+		<xs:annotation>
+			<xs:documentation>List of character's classes</xs:documentation>
+			<xs:documentation>Elements: class &#8805; 1</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element type="ns:classType" name="class" minOccurs="1" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="classType">
+		<xs:annotation>
+			<xs:documentation>A character's class</xs:documentation>
+			<xs:documentation>Elements: subclass, spells</xs:documentation>
+			<xs:documentation>Attributes: source (required), name(required), level (required), hit-dice (required), spell-mod</xs:documentation>
+		</xs:annotation>
 		<xs:all>
 			<xs:element type="ns:subclassType" name="subclass" minOccurs="0" />
 			<xs:element type="ns:spellsType" name="spells" minOccurs="0" />
 		</xs:all>
 		<xs:attributeGroup ref="ns:sourceAttr" />
 		<xs:attribute type="ns:levelValueType" use="required" name="level" />
-		<xs:attribute type="xs:positiveInteger" use="required" name="hit-base" />
 		<xs:attribute type="ns:hitDiceType" use="required" name="hit-dice" />
-		<xs:attribute type="xs:positiveInteger" use="required" name="hit-fixed" />
-		<xs:attribute type="ns:modListType" name="hit-mod" />
-		<xs:attribute type="ns:modListType" name="spell-mod"></xs:attribute>
+		<xs:attribute type="ns:modListType" name="spell-mod">
+			<xs:annotation>
+				<xs:documentation>Which modifier to use for the spell casting modifier</xs:documentation>
+				<xs:documentation>Type: string</xs:documentation>
+				<xs:documentation>Accepted values: "str", "dex", "con", "int", "wis", and "cha"</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="componentType">
+		<xs:annotation>
+			<xs:documentation>Component for spell</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Attributes: price</xs:documentation>
+		</xs:annotation>
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute type="xs:string" name="price" />
+				<xs:attribute type="xs:string" name="price">
+					<xs:annotation>
+						<xs:documentation>Price of component</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="componenetsType">
+		<xs:annotation>
+			<xs:documentation>List of components required to cast spell</xs:documentation>
+			<xs:documentation>Elements: component &#8805; 0</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element type="ns:componentType" name="component" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="detailsType">
+		<xs:annotation>
+			<xs:documentation>Character details</xs:documentation>
+			<xs:documentation>Elements: name (required), gender, experience (required), background (required), hp-max (required), hp (required), temp-hp, alignment, money, equipped-armor, equipped-shield</xs:documentation>
+		</xs:annotation>
 		<xs:all>
-			<xs:element type="xs:string" name="name" />
-			<xs:element type="xs:string" name="gender" minOccurs="0" />
-			<xs:element type="ns:alignmentType" name="alignment" />
-			<xs:element type="xs:integer" name="experience" />
+			<xs:element type="xs:string" name="name">
+				<xs:annotation>
+					<xs:documentation>Name of character</xs:documentation>
+					<xs:documentation>Type: string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:string" name="gender" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gender of character</xs:documentation>
+					<xs:documentation>Type: string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:nonNegativeInteger" name="experience">
+				<xs:annotation>
+					<xs:documentation>Experience score of the character</xs:documentation>
+					<xs:documentation>Type: integer</xs:documentation>
+					<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element type="ns:backgroundType" name="background" />
+			<xs:element type="xs:nonNegativeInteger" name="hp-max">
+				<xs:annotation>
+					<xs:documentation>Maximun hit points of character</xs:documentation>
+					<xs:documentation>Type: integer</xs:documentation>
+					<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:nonNegativeInteger" name="hp">
+				<xs:annotation>
+					<xs:documentation>Current hit points of character</xs:documentation>
+					<xs:documentation>Type: integer</xs:documentation>
+					<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:nonNegativeInteger" name="temp-hp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Temporary hit points for character</xs:documentation>
+					<xs:documentation>Type: integer</xs:documentation>
+					<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="ns:alignmentType" name="alignment" minOccurs="0" />
 			<xs:element type="ns:moneyType" name="money" minOccurs="0" />
-			<xs:element type="xs:nonNegativeInteger" name="hp" />
 			<xs:element type="ns:equippedArmorType" name="equipped-armor" minOccurs="0" />
-			<xs:element type="xs:boolean" name="equipped-shield" minOccurs="0" />
+			<xs:element type="xs:boolean" name="equipped-shield" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Whether or not the character has a shield equipped</xs:documentation>
+					<xs:documentation>Type: boolean</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="featureType">
+		<xs:annotation>
+			<xs:documentation>A feature or trait</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Attributes: from (required), name (required)</xs:documentation>
+		</xs:annotation>
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
-				<xs:attribute type="xs:string" use="required" name="name" />
 				<xs:attribute type="ns:fromType" use="required" name="from" />
+				<xs:attribute type="xs:string" use="required" name="name">
+					<xs:annotation>
+						<xs:documentation>Name of the feature or trait</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="featuresType">
+		<xs:annotation>
+			<xs:documentation>List of features</xs:documentation>
+			<xs:documentation>Elements: feature &#8805; 0</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element type="ns:featureType" name="feature" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="moneyType">
-		<xs:attribute type="xs:nonNegativeInteger" name="cp" />
-		<xs:attribute type="xs:nonNegativeInteger" name="sp" />
-		<xs:attribute type="xs:nonNegativeInteger" name="ep" />
-		<xs:attribute type="xs:nonNegativeInteger" name="gp" />
-		<xs:attribute type="xs:nonNegativeInteger" name="pp" />
+		<xs:annotation>
+			<xs:documentation>Character's money</xs:documentation>
+			<xs:documentation>Attributes: cp, sp, ep, gp, pp</xs:documentation>
+		</xs:annotation>
+		<xs:attribute type="xs:nonNegativeInteger" name="cp">
+			<xs:annotation>
+				<xs:documentation>Copper pieces</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+				<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:nonNegativeInteger" name="sp">
+			<xs:annotation>
+				<xs:documentation>Silver pieces</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+				<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:nonNegativeInteger" name="ep">
+			<xs:annotation>
+				<xs:documentation>Electrum pieces</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+				<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:nonNegativeInteger" name="gp">
+			<xs:annotation>
+				<xs:documentation>Gold pieces</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+				<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:nonNegativeInteger" name="pp">
+			<xs:annotation>
+				<xs:documentation>Platinum pieces</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+				<xs:documentation>Accepted values: &#8805; 0</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
-	<xs:complexType name="playerType">
+	<xs:complexType name="characterType">
+		<xs:annotation>
+			<xs:documentation>Root of character information</xs:documentation>
+			<xs:documentation>Elements: details (required), race (required), ability (required), skills, classlist (required), characteristics, proficiencies, features (required)</xs:documentation>
+		</xs:annotation>
 		<xs:all>
 			<xs:element type="ns:detailsType" name="details" />
 			<xs:element type="ns:raceType" name="race" />
@@ -112,32 +306,97 @@
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="proficienciesType">
+		<xs:annotation>
+			<xs:documentation>List of proficiencies</xs:documentation>
+			<xs:documentation>Elements: language &#8805; 0, armor &#8805; 0, other &#8805; 0</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element type="xs:string" name="language" />
+				<xs:element type="xs:string" name="language">
+					<xs:annotation>
+						<xs:documentation>A proficiency in a known language</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 				<xs:element type="ns:armorType" name="armor" />
-				<xs:element type="xs:string" name="other" />
+				<xs:element type="xs:string" name="other">
+					<xs:annotation>
+						<xs:documentation>A proficiency that may not fall into other categories</xs:documentation>
+						<xs:documentation>Type: string</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="raceType">
+		<xs:annotation>
+			<xs:documentation>Character race details</xs:documentation>
+			<xs:documentation>Elements: creature-type (required), speed (required), size (required) subrace, ability-score-increase, age, height, weight</xs:documentation>
+		</xs:annotation>
 		<xs:all>
-			<xs:element type="xs:string" name="creature-type" />
-			<xs:element type="xs:nonNegativeInteger" name="age" />
-			<xs:element type="xs:positiveInteger" name="speed" />
-			<xs:element type="xs:string" name="height" />
+			<xs:element type="xs:string" name="creature-type">
+				<xs:annotation>
+					<xs:documentation>Type of creature character is</xs:documentation>
+					<xs:documentation>Type: string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:positiveInteger" name="speed">
+				<xs:annotation>
+					<xs:documentation>Movement speed of character (in feet)</xs:documentation>
+					<xs:documentation>Type: integer</xs:documentation>
+					<xs:documentation>Accepted values: &#8805; 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element type="ns:sizeType" name="size" />
-			<xs:element type="xs:integer" name="weight" />
-			<xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
 			<xs:element type="ns:subraceType" name="subrace" minOccurs="0" />
+			<xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
+			<xs:element type="xs:positiveInteger" name="age" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Age of character</xs:documentation>
+					<xs:documentation>Type: integer</xs:documentation>
+					<xs:documentation>Accepted values: &#8805; 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:string" name="height" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Height of character</xs:documentation>
+					<xs:documentation>Type: string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:positiveInteger" name="weight" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Weight of character (in lb)</xs:documentation>
+					<xs:documentation>Type: integer</xs:documentation>
+					<xs:documentation>Accepted values: &#8805; 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:all>
 		<xs:attributeGroup ref="ns:sourceAttr" />
 	</xs:complexType>
 	<xs:complexType name="skillType">
-		<xs:attribute type="xs:boolean" name="proficient" />
-		<xs:attribute type="xs:boolean" name="expertise" />
+		<xs:annotation>
+			<xs:documentation>Character skill</xs:documentation>
+			<xs:documentation>Attributes: proficient, expertise</xs:documentation>
+		</xs:annotation>
+		<xs:attribute type="xs:boolean" name="proficient">
+			<xs:annotation>
+				<xs:documentation>Whether the character is proficient in this skill</xs:documentation>
+				<xs:documentation>Type: boolean</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:boolean" name="expertise">
+			<xs:annotation>
+				<xs:documentation>Whether the character has expertise in this skill</xs:documentation>
+				<xs:documentation>Type: boolean</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="skillsType">
+		<xs:annotation>
+			<xs:documentation>Character skills</xs:documentation>
+			<xs:documentation>Elements: acrobatics, animal-handling, arcana, athletics, deception, history, insight, intimidation, investigation, medicine, nature, perception, performance, persuasion, religion, sleight-of-hand, stealth, and survival</xs:documentation>
+			<xs:documentation>Attributes: jack-of-all-trades</xs:documentation>
+		</xs:annotation>
 		<xs:all>
 			<xs:element type="ns:skillType" name="acrobatics" minOccurs="0" />
 			<xs:element type="ns:skillType" name="animal-handling" minOccurs="0" />
@@ -158,49 +417,128 @@
 			<xs:element type="ns:skillType" name="stealth" minOccurs="0" />
 			<xs:element type="ns:skillType" name="survival" minOccurs="0" />
 		</xs:all>
-		<xs:attribute type="xs:boolean" name="jack-of-all-trades" />
+		<xs:attribute type="xs:boolean" name="jack-of-all-trades">
+			<xs:annotation>
+				<xs:documentation>Whether character has the jack-of-all-trades feature</xs:documentation>
+				<xs:documentation>Type: boolean</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="spellType">
+		<xs:annotation>
+			<xs:documentation>A spell</xs:documentation>
+			<xs:documentation>Elements: components, description (required), higher-levels</xs:documentation>
+			<xs:documentation>Attributes: source (required), name (required), level (required), school (required), ritual, casting-time (required), range (required), verbal, somatic, concentration, and duration (required)</xs:documentation>
+		</xs:annotation>
 		<xs:all>
 			<xs:element type="ns:componenetsType" name="components" minOccurs="0" />
-			<xs:element type="xs:string" name="description" />
-			<xs:element type="xs:string" name="higher-levels" minOccurs="0" />
+			<xs:element type="xs:string" name="description">
+				<xs:annotation>
+					<xs:documentation>Spell description</xs:documentation>
+					<xs:documentation>Type: string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element type="xs:string" name="higher-levels" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>How the spell functions when upcast</xs:documentation>
+					<xs:documentation>Type: string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:all>
 		<xs:attributeGroup ref="ns:sourceAttr" />
 		<xs:attribute type="ns:levelType" use="required" name="level" />
 		<xs:attribute type="ns:schoolType" use="required" name="school" />
-		<xs:attribute type="xs:boolean" name="ritual" />
-		<xs:attribute type="xs:string" use="required" name="casting-time" />
-		<xs:attribute type="xs:string" use="required" name="range" />
-		<xs:attribute type="xs:boolean" name="verbal" />
-		<xs:attribute type="xs:boolean" name="somatic" />
-		<xs:attribute type="xs:boolean" name="concentration" />
-		<xs:attribute type="xs:string" use="required" name="duration" />
+		<xs:attribute type="xs:boolean" name="ritual">
+			<xs:annotation>
+				<xs:documentation>Whether the spell can be cast as a ritual</xs:documentation>
+				<xs:documentation>Type: boolean</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:string" use="required" name="casting-time">
+			<xs:annotation>
+				<xs:documentation>How long the spell takes to cast</xs:documentation>
+				<xs:documentation>Type: string</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:string" use="required" name="range">
+			<xs:annotation>
+				<xs:documentation>The distance a spell can be used up to</xs:documentation>
+				<xs:documentation>Type: string</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:boolean" name="verbal">
+			<xs:annotation>
+				<xs:documentation>Whether the spell requires a verbal component</xs:documentation>
+				<xs:documentation>Type: boolean</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:boolean" name="somatic">
+			<xs:annotation>
+				<xs:documentation>Whether the spell requires a somatic component</xs:documentation>
+				<xs:documentation>Type: boolean</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:boolean" name="concentration">
+			<xs:annotation>
+				<xs:documentation>Whether the spell requires concentration</xs:documentation>
+				<xs:documentation>Type: boolean</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute type="xs:string" use="required" name="duration">
+			<xs:annotation>
+				<xs:documentation>How long the spell lasts</xs:documentation>
+				<xs:documentation>Type: string</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="spellsType">
+		<xs:annotation>
+			<xs:documentation>List of spells</xs:documentation>
+			<xs:documentation>Elements: spell &#8805; 0</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element type="ns:spellType" name="spell" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="subclassType">
+		<xs:annotation>
+			<xs:documentation>Subclass character belongs too</xs:documentation>
+			<xs:documentation>Elements: spells</xs:documentation>
+			<xs:documentation>Attributes: source (required), name (required)</xs:documentation>
+		</xs:annotation>
 		<xs:all>
 			<xs:element type="ns:spellsType" name="spells" minOccurs="0" />
 		</xs:all>
 		<xs:attributeGroup ref="ns:sourceAttr" />
 	</xs:complexType>
 	<xs:complexType name="subraceType">
+		<xs:annotation>
+			<xs:documentation>Character's subrace</xs:documentation>
+			<xs:documentation>Elements: ability-score-increase</xs:documentation>
+			<xs:documentation>Attributes: source (required), name (required)</xs:documentation>
+		</xs:annotation>
 		<xs:all>
 			<xs:element type="ns:abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
 		</xs:all>
 		<xs:attributeGroup ref="ns:sourceAttr" />
 	</xs:complexType>
-	<xs:element type="ns:playerType" name="player" />
+	<xs:element type="ns:characterType" name="character" />
 	<xs:simpleType name="abilityValueType">
-		<xs:restriction base="xs:positiveInteger">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:annotation>
+				<xs:documentation>Base ability score value</xs:documentation>
+				<xs:documentation>Type: integer</xs:documentation>
+				<xs:documentation>Accepted values: 0-30</xs:documentation>
+			</xs:annotation>
 			<xs:maxExclusive value="31" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="alignmentType">
+		<xs:annotation>
+			<xs:documentation>Alignment of character</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "True Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", and "Chaotic Evil"</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Lawful Good" />
 			<xs:enumeration value="Lawful Neutral" />
@@ -214,14 +552,24 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="armorType">
+		<xs:annotation>
+			<xs:documentation>A proficiency in a type of armor</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "light", "medium", "heavy", and "shields"</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="light" />
 			<xs:enumeration value="medium" />
 			<xs:enumeration value="heavy" />
-			<xs:enumeration value="shield" />
+			<xs:enumeration value="shields" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="equippedArmorType">
+		<xs:annotation>
+			<xs:documentation>Currently armor equipped</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "None", "Padded", "Leather" "Studded Leather", "Hide", "Chain Shirt", "Scale Mail", "Spiked Armor", "Breastplate", "Halfplate", "Ring Mail", "Chain Mail", "Splint", "Plate"</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="None" />
 			<xs:enumeration value="Padded" />
@@ -240,30 +588,41 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="fromType">
+		<xs:annotation>
+			<xs:documentation>Where this feature comes from</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: matching /race(:subrace)?|class:{classIndex}(:subclass)?@{classLevel}/</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:pattern value="race(:subrace)?|class:\d+(:subclass)?@(20|1[0-9]|[1-9])" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="hitDiceType">
-		<xs:restriction base="xs:string">
-			<xs:pattern value="d(4|6|8|10|12|20)" />
+		<xs:annotation>
+			<xs:documentation>What number-sided dice is used as the hit dice</xs:documentation>
+			<xs:documentation>Type: integer</xs:documentation>
+			<xs:documentation>Accepted values: 4, 6, 8, 10, 12, and 20</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:pattern value="(4|6|8|10|12|20)" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="levelType">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="cantrip" />
-			<xs:enumeration value="1" />
-			<xs:enumeration value="2" />
-			<xs:enumeration value="3" />
-			<xs:enumeration value="4" />
-			<xs:enumeration value="5" />
-			<xs:enumeration value="6" />
-			<xs:enumeration value="7" />
-			<xs:enumeration value="8" />
-			<xs:enumeration value="9" />
+		<xs:annotation>
+			<xs:documentation>Spellcasting level of the spell</xs:documentation>
+			<xs:documentation>Type: integer</xs:documentation>
+			<xs:documentation>Accepted values: 0-9</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:maxExclusive value="10" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="levelValueType">
+		<xs:annotation>
+			<xs:documentation>Level for this class</xs:documentation>
+			<xs:documentation>Type: integer</xs:documentation>
+			<xs:documentation>Accepted values: 1-20</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:positiveInteger">
 			<xs:maxExclusive value="21" />
 		</xs:restriction>
@@ -279,9 +638,19 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="savingThrowsType">
+		<xs:annotation>
+			<xs:documentation>Saving throw proficiencies</xs:documentation>
+			<xs:documentation>Type: list[string]</xs:documentation>
+			<xs:documentation>Accepted values: "str", "dex", "con", "int", "wis", and "cha"</xs:documentation>
+		</xs:annotation>
 		<xs:list itemType="ns:modListType" />
 	</xs:simpleType>
 	<xs:simpleType name="schoolType">
+		<xs:annotation>
+			<xs:documentation>School to which spell belongs</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", and "transmutation"</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="abjuration" />
 			<xs:enumeration value="conjuration" />
@@ -294,6 +663,11 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="sizeType">
+		<xs:annotation>
+			<xs:documentation>Creature size</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "tiny", "small", "medium", "large", "huge", and "gargantuan"</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="tiny" />
 			<xs:enumeration value="small" />
@@ -304,6 +678,11 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="sourceType">
+		<xs:annotation>
+			<xs:documentation>Where the material is sourced from</xs:documentation>
+			<xs:documentation>Type: string</xs:documentation>
+			<xs:documentation>Accepted values: "ua", "basic", "phb", "dmg", and "mm"</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="ua" />
 			<xs:enumeration value="basic" />

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <xs:stylesheet version="1.0" xmlns:xs="http://www.w3.org/1999/XSL/Transform">
-	<xs:template xmlns:ns="http://github.com/olivi-r/characters/raw/main/schema.xsd" match="/ns:player">
-		<xs:variable name="playerLevel" select="sum(ns:classlist/ns:class/@level)" />
-		<xs:variable name="proficiencyBonus" select="floor(($playerLevel - 1) div 4) + 2" />
+	<xs:template xmlns:ns="http://github.com/olivi-r/characters/raw/main/schema.xsd" match="/ns:character">
+		<xs:variable name="characterLevel" select="sum(ns:classlist/ns:class/@level)" />
+		<xs:variable name="proficiencyBonus" select="floor(($characterLevel - 1) div 4) + 2" />
 		<xs:variable name="strAbility" select="ns:ability/ns:str + sum(//ns:ability-score-increase/@str)" />
 		<xs:variable name="dexAbility" select="ns:ability/ns:dex + sum(//ns:ability-score-increase/@dex)" />
 		<xs:variable name="conAbility" select="ns:ability/ns:con + sum(//ns:ability-score-increase/@con)" />
