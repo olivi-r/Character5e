@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <xs:stylesheet version="1.0" xmlns:xs="http://www.w3.org/1999/XSL/Transform">
-	<xs:template xmlns:ns="http://github.com/olivi-r/characters/raw/main/schema.xsd" match="/ns:character">
-		<xs:variable name="characterLevel" select="sum(ns:classlist/ns:class/@level)" />
+	<xs:template match="/character">
+		<xs:variable name="characterLevel" select="sum(classlist/class/@level)" />
 		<xs:variable name="proficiencyBonus" select="floor(($characterLevel - 1) div 4) + 2" />
-		<xs:variable name="strAbility" select="ns:ability/ns:str + sum(//ns:ability-score-increase/@str)" />
-		<xs:variable name="dexAbility" select="ns:ability/ns:dex + sum(//ns:ability-score-increase/@dex)" />
-		<xs:variable name="conAbility" select="ns:ability/ns:con + sum(//ns:ability-score-increase/@con)" />
-		<xs:variable name="intAbility" select="ns:ability/ns:int + sum(//ns:ability-score-increase/@int)" />
-		<xs:variable name="wisAbility" select="ns:ability/ns:wis + sum(//ns:ability-score-increase/@wis)" />
-		<xs:variable name="chaAbility" select="ns:ability/ns:cha + sum(//ns:ability-score-increase/@cha)" />
+		<xs:variable name="strAbility" select="ability/str + sum(//ability-score-increase/@str)" />
+		<xs:variable name="dexAbility" select="ability/dex + sum(//ability-score-increase/@dex)" />
+		<xs:variable name="conAbility" select="ability/con + sum(//ability-score-increase/@con)" />
+		<xs:variable name="intAbility" select="ability/int + sum(//ability-score-increase/@int)" />
+		<xs:variable name="wisAbility" select="ability/wis + sum(//ability-score-increase/@wis)" />
+		<xs:variable name="chaAbility" select="ability/cha + sum(//ability-score-increase/@cha)" />
 		<xs:variable name="str" select="floor($strAbility div 2) - 5" />
 		<xs:variable name="dex" select="floor($dexAbility div 2) - 5" />
 		<xs:variable name="con" select="floor($conAbility div 2) - 5" />
@@ -17,7 +17,7 @@
 		<xs:variable name="cha" select="floor($chaAbility div 2) - 5" />
 		<xs:variable name="strSave">
 			<xs:choose>
-				<xs:when test="ns:ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' str ')]">
+				<xs:when test="ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' str ')]">
 					<xs:value-of select="$str + $proficiencyBonus" />
 				</xs:when>
 				<xs:otherwise>
@@ -27,7 +27,7 @@
 		</xs:variable>
 		<xs:variable name="dexSave">
 			<xs:choose>
-				<xs:when test="ns:ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' dex ')]">
+				<xs:when test="ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' dex ')]">
 					<xs:value-of select="$dex + $proficiencyBonus" />
 				</xs:when>
 				<xs:otherwise>
@@ -37,7 +37,7 @@
 		</xs:variable>
 		<xs:variable name="conSave">
 			<xs:choose>
-				<xs:when test="ns:ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' con ')]">
+				<xs:when test="ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' con ')]">
 					<xs:value-of select="$con + $proficiencyBonus" />
 				</xs:when>
 				<xs:otherwise>
@@ -47,7 +47,7 @@
 		</xs:variable>
 		<xs:variable name="intSave">
 			<xs:choose>
-				<xs:when test="ns:ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' int ')]">
+				<xs:when test="ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' int ')]">
 					<xs:value-of select="$int + $proficiencyBonus" />
 				</xs:when>
 				<xs:otherwise>
@@ -57,7 +57,7 @@
 		</xs:variable>
 		<xs:variable name="wisSave">
 			<xs:choose>
-				<xs:when test="ns:ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' wis ')]">
+				<xs:when test="ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' wis ')]">
 					<xs:value-of select="$wis + $proficiencyBonus" />
 				</xs:when>
 				<xs:otherwise>
@@ -67,7 +67,7 @@
 		</xs:variable>
 		<xs:variable name="chaSave">
 			<xs:choose>
-				<xs:when test="ns:ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' cha ')]">
+				<xs:when test="ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' cha ')]">
 					<xs:value-of select="$cha + $proficiencyBonus" />
 				</xs:when>
 				<xs:otherwise>
@@ -77,9 +77,9 @@
 		</xs:variable>
 		<xs:variable name="acrobatics">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:acrobatics[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/acrobatics[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:acrobatics[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/acrobatics[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $dex" />
 						</xs:when>
 						<xs:otherwise>
@@ -89,7 +89,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $dex" />
 						</xs:when>
 						<xs:otherwise>
@@ -101,9 +101,9 @@
 		</xs:variable>
 		<xs:variable name="animalHandling">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:animalHandling[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/animalHandling[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:animalHandling[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/animalHandling[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -113,7 +113,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -125,9 +125,9 @@
 		</xs:variable>
 		<xs:variable name="arcana">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:arcana[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/arcana[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:arcana[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/arcana[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -137,7 +137,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -149,9 +149,9 @@
 		</xs:variable>
 		<xs:variable name="athletics">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:athletics[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/athletics[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:athletics[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/athletics[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $str" />
 						</xs:when>
 						<xs:otherwise>
@@ -161,7 +161,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $str" />
 						</xs:when>
 						<xs:otherwise>
@@ -173,9 +173,9 @@
 		</xs:variable>
 		<xs:variable name="deception">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:deception[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/deception[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:deception[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/deception[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -185,7 +185,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -197,9 +197,9 @@
 		</xs:variable>
 		<xs:variable name="history">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:history[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/history[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:history[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/history[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -209,7 +209,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -221,9 +221,9 @@
 		</xs:variable>
 		<xs:variable name="insight">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:insight[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/insight[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:insight[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/insight[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -233,7 +233,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -245,9 +245,9 @@
 		</xs:variable>
 		<xs:variable name="intimidation">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:intimidation[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/intimidation[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:intimidation[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/intimidation[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -257,7 +257,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -269,9 +269,9 @@
 		</xs:variable>
 		<xs:variable name="investigation">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:investigation[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/investigation[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:investigation[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/investigation[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -281,7 +281,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -293,9 +293,9 @@
 		</xs:variable>
 		<xs:variable name="medicine">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:medicine[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/medicine[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:medicine[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/medicine[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -305,7 +305,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -317,9 +317,9 @@
 		</xs:variable>
 		<xs:variable name="nature">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:nature[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/nature[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:nature[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/nature[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -329,7 +329,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -341,9 +341,9 @@
 		</xs:variable>
 		<xs:variable name="perception">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:perception[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/perception[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:perception[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/perception[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -353,7 +353,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -365,9 +365,9 @@
 		</xs:variable>
 		<xs:variable name="performance">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:performance[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/performance[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:performance[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/performance[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -377,7 +377,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -389,9 +389,9 @@
 		</xs:variable>
 		<xs:variable name="persuasion">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:persuasion[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/persuasion[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:persuasion[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/persuasion[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -401,7 +401,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $cha" />
 						</xs:when>
 						<xs:otherwise>
@@ -413,9 +413,9 @@
 		</xs:variable>
 		<xs:variable name="religion">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:religion[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/religion[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:religion[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/religion[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -425,7 +425,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $int" />
 						</xs:when>
 						<xs:otherwise>
@@ -437,9 +437,9 @@
 		</xs:variable>
 		<xs:variable name="sleightOfHand">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:sleightOfHand[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/sleightOfHand[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:sleightOfHand[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/sleightOfHand[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $dex" />
 						</xs:when>
 						<xs:otherwise>
@@ -449,7 +449,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $dex" />
 						</xs:when>
 						<xs:otherwise>
@@ -461,9 +461,9 @@
 		</xs:variable>
 		<xs:variable name="stealth">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:stealth[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/stealth[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:stealth[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/stealth[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $dex" />
 						</xs:when>
 						<xs:otherwise>
@@ -473,7 +473,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $dex" />
 						</xs:when>
 						<xs:otherwise>
@@ -485,9 +485,9 @@
 		</xs:variable>
 		<xs:variable name="survival">
 			<xs:choose>
-				<xs:when test="ns:skills/ns:survival[@proficient='1' or @proficient='true']">
+				<xs:when test="skills/survival[@proficient='1' or @proficient='true']">
 					<xs:choose>
-						<xs:when test="ns:skills/ns:survival[@expertise='1' or @expertise='true']">
+						<xs:when test="skills/survival[@expertise='1' or @expertise='true']">
 							<xs:value-of select="$proficiencyBonus * 2 + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -497,7 +497,7 @@
 				</xs:when>
 				<xs:otherwise>
 					<xs:choose>
-						<xs:when test="ns:skills/@jack-of-all-trades='1'">
+						<xs:when test="skills/@jack-of-all-trades='1'">
 							<xs:value-of select="floor($proficiencyBonus div 2) + $wis" />
 						</xs:when>
 						<xs:otherwise>
@@ -647,7 +647,7 @@
 				<div class="character-sheet">
 					<div class="header">
 						<h1>
-							<xs:value-of select="ns:details/ns:name" />
+							<xs:value-of select="details/name" />
 						</h1>
 					</div>
 					<div class="main-content">
