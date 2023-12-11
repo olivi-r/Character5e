@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+<!DOCTYPE wrapper [
+	<!ENTITY style SYSTEM "style.css">
+]>
 <xs:stylesheet version="1.0" xmlns:xs="http://www.w3.org/1999/XSL/Transform">
 	<xs:template match="/character">
 		<xs:variable name="characterLevel" select="sum(classlist/class/@level)" />
@@ -507,140 +510,11 @@
 				</xs:otherwise>
 			</xs:choose>
 		</xs:variable>
-			<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+    <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<style>
-					body {
-						font-family: 'Arial', sans-serif;
-						margin: 0;
-						padding: 0;
-						background-color: #f2f2f2;
-					}
-
-					.character-sheet {
-						max-width: 600px;
-						margin: 20px auto;
-						background-color: #fff;
-						padding: 20px;
-						box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-					}
-
-					.header {
-						display: flex;
-						justify-content: space-between;
-						align-items: center;
-						margin-bottom: 20px;
-					}
-
-					.header h1, .header p {
-						margin: 0.3em;
-					}
-
-					.main-content, .column {
-						display: flex;
-					}
-
-					.column {
-						flex-direction: column;
-						margin-right: 10px;
-					}
-
-					.box {
-						width: 100%;
-						align-self: flex-start;
-						border: 2px solid #00CBFF;
-						border-radius: 10px;
-						margin-bottom: 10px;
-						text-align: center;
-					}
-
-					.box h2 {
-						font-size: 1em;
-					}
-
-					.stats {
-						margin: 10px;
-					}
-
-					.stats h3 {
-						margin: 0;
-						font-size: 0.6em;
-					}
-
-					.stat {
-						border: 2px solid #4CAF50;
-						border-radius: 10px;
-						padding: 10px;
-						margin-bottom: 10px;
-						position: relative;
-						text-align: center;
-					}
-
-					.stat-mod {
-						font-size: 1.5em;
-						color: #4CAF50;
-						font-weight: bold;
-					}
-
-					.base-stat {
-						font-size: 1.2em;
-						color: #555;
-						margin-top: 5px;
-					}
-
-					.saves {
-						text-align: center;
-						margin-top: 5px;
-						margin-bottom: 5px;
-					}
-
-					.saves h3 {
-						margin: 0;
-						font-size: 0.75em;
-						margin-left: 10px;
-					}
-
-					.save {
-						display: flex;
-						align-items: center;
-						margin-bottom: 5px;
-						margin-right: 10px;
-					}
-
-					.save-mod {
-						width: 1em;
-						font-size: 0.75em;
-						text-align: right;
-						margin-left: 10px;
-					}
-
-					.skills {
-						margin-top: 5px;
-						margin-bottom: 5px;
-					}
-
-					.skills h3 {
-						margin: 0;
-						font-size: 0.75em;
-						margin-left: 10px;
-					}
-
-					.skill {
-						display: flex;
-						align-items: center;
-						margin-bottom: 5px;
-						margin-right: 10px;
-					}
-
-					.skill-mod {
-						width: 1em;
-						font-size: 0.75em;
-						text-align: right;
-						margin-left: 10px;
-					}
-				</style>
+				<style>&style;</style>
 				<title>Character Sheet</title>
 			</head>
 			<body>
