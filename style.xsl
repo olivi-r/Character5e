@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
+
+<!-- Read contents of style.css into &style; entity -->
 <!DOCTYPE wrapper [
 	<!ENTITY style SYSTEM "style.css">
 ]>
+
 <xs:stylesheet version="1.0" xmlns:xs="http://www.w3.org/1999/XSL/Transform">
 	<xs:template match="/character">
+
+		<!-- Determine character variables -->
 		<xs:variable name="characterLevel" select="sum(classlist/class/@level)" />
 		<xs:variable name="proficiencyBonus" select="floor(($characterLevel - 1) div 4) + 2" />
 		<xs:variable name="strAbility" select="ability/str + sum(//ability-score-increase/@str)" />
@@ -18,6 +23,8 @@
 		<xs:variable name="int" select="floor($intAbility div 2) - 5" />
 		<xs:variable name="wis" select="floor($wisAbility div 2) - 5" />
 		<xs:variable name="cha" select="floor($chaAbility div 2) - 5" />
+
+		<!-- Determine saving throw modifiers -->
 		<xs:variable name="strSave">
 			<xs:choose>
 				<xs:when test="ability[contains(concat(' ', normalize-space(@saving-throws), ' '), ' str ')]">
@@ -78,6 +85,8 @@
 				</xs:otherwise>
 			</xs:choose>
 		</xs:variable>
+
+		<!-- Determine skill modifiers -->
 		<xs:variable name="acrobatics">
 			<xs:choose>
 				<xs:when test="skills/acrobatics[@proficient='1' or @proficient='true']">
@@ -510,6 +519,8 @@
 				</xs:otherwise>
 			</xs:choose>
 		</xs:variable>
+
+		<!-- Begin output document -->
     	<html lang="en">
 			<head>
 				<meta charset="UTF-8" />
@@ -527,6 +538,8 @@
 					<div class="main-content">
 						<div class="column">
 							<div class="box">
+
+								<!-- Ability score and modifiers box -->
 								<div class="stats">
 									<div class="stat">
 										<h3>Strength</h3>
@@ -589,6 +602,8 @@
 							<div class="box">
 								<h2>Saving Throws</h2>
 								<div class="saves">
+
+									<!-- Saving throw modifiers box -->
 									<div class="save">
 										<div class="save-mod">
 											<xs:value-of select="$strSave" />
@@ -630,6 +645,8 @@
 							<div class="box">
 								<h2>Skills</h2>
 								<div class="skills">
+
+									<!-- Skill modifiers box -->
 									<div class="skill">
 										<div class="skill-mod">
 											<xs:value-of select="$acrobatics" />
