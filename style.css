@@ -38,7 +38,9 @@ body {
 .box {
     width: 100%;
     align-self: flex-start;
-    border: 2px solid #00CBFF;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00CBFF;
     border-radius: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -58,7 +60,9 @@ body {
 }
 
 .stat {
-    border: 2px solid #4CAF50;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #4CAF50;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
