@@ -1,47 +1,5 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-	<xs:complexType name="abilityScoreIncreaseType">
-		<xs:annotation>
-			<xs:documentation>Values to be added to the base ability score</xs:documentation>
-			<xs:documentation>Attributes: str, dex, con, int, wis, cha</xs:documentation>
-		</xs:annotation>
-		<xs:attribute type="xs:integer" name="str">
-			<xs:annotation>
-				<xs:documentation>Strength score increase</xs:documentation>
-				<xs:documentation>Type: integer</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute type="xs:integer" name="dex">
-			<xs:annotation>
-				<xs:documentation>Dexterity score increase</xs:documentation>
-				<xs:documentation>Type: integer</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute type="xs:integer" name="con">
-			<xs:annotation>
-				<xs:documentation>Constitution score increase</xs:documentation>
-				<xs:documentation>Type: integer</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute type="xs:integer" name="int">
-			<xs:annotation>
-				<xs:documentation>Intelligence score increase</xs:documentation>
-				<xs:documentation>Type: integer</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute type="xs:integer" name="wis">
-			<xs:annotation>
-				<xs:documentation>Wisdom score increase</xs:documentation>
-				<xs:documentation>Type: integer</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute type="xs:integer" name="cha">
-			<xs:annotation>
-				<xs:documentation>Charisma score increase</xs:documentation>
-				<xs:documentation>Type: integer</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
 	<xs:simpleType name="abilityValueType">
 		<xs:restriction base="xs:nonNegativeInteger">
 			<xs:annotation>
@@ -248,7 +206,7 @@
 					<xs:complexType>
 						<xs:annotation>
 							<xs:documentation>Character race details</xs:documentation>
-							<xs:documentation>Elements: speed (required), size (required) subrace, ability-score-increase, creature-type, alignment, age, height, weight</xs:documentation>
+							<xs:documentation>Elements: speed (required), size (required) subrace, creature-type, alignment, age, height, weight</xs:documentation>
 							<xs:documentation>Attributes: name (required), source</xs:documentation>
 						</xs:annotation>
 						<xs:all>
@@ -280,16 +238,11 @@
 								<xs:complexType>
 									<xs:annotation>
 										<xs:documentation>Character's subrace</xs:documentation>
-										<xs:documentation>Elements: ability-score-increase</xs:documentation>
 										<xs:documentation>Attributes: name (required), source</xs:documentation>
 									</xs:annotation>
-									<xs:all>
-										<xs:element type="abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
-									</xs:all>
 									<xs:attributeGroup ref="sourceAttr" />
 								</xs:complexType>
 							</xs:element>
-							<xs:element type="abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
 							<xs:element type="xs:string" name="creature-type" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Type of creature character is</xs:documentation>
@@ -413,11 +366,10 @@
 								<xs:complexType>
 									<xs:annotation>
 										<xs:documentation>A character's class</xs:documentation>
-										<xs:documentation>Elements: ability-score-increase, subclass, spells</xs:documentation>
+										<xs:documentation>Elements: subclass, spells</xs:documentation>
 										<xs:documentation>Attributes: name(required), source, level (required), and hit-dice (required)</xs:documentation>
 									</xs:annotation>
 									<xs:all>
-										<xs:element type="abilityScoreIncreaseType" name="ability-score-increase" minOccurs="0" />
 										<xs:element name="subclass" minOccurs="0">
 											<xs:complexType>
 												<xs:annotation>
