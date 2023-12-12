@@ -1,0 +1,23 @@
+body {
+    background-color: #f2f2f2;
+}
+
+.character-sheet {
+    background-color: #fff;
+}
+
+.box {
+    border-color: #00CBFF;
+}
+
+.stat {
+    border-color: #4CAF50;
+}
+
+.stat-mod {
+    color: #4CAF50;
+}
+
+.base-stat {
+    color: #555;
+}

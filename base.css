@@ -2,13 +2,11 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
 }
 
 .character-sheet {
     max-width: 600px;
     margin: 20px auto;
-    background-color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -40,7 +38,6 @@ body {
     align-self: flex-start;
     border-width: 2px;
     border-style: solid;
-    border-color: #00CBFF;
     border-radius: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -62,7 +59,6 @@ body {
 .stat {
     border-width: 2px;
     border-style: solid;
-    border-color: #4CAF50;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
@@ -72,13 +68,11 @@ body {
 
 .stat-mod {
     font-size: 1.5em;
-    color: #4CAF50;
     font-weight: bold;
 }
 
 .base-stat {
     font-size: 1.2em;
-    color: #555;
     margin-top: 5px;
 }
 
