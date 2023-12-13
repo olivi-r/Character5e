@@ -1,5 +1,6 @@
 import json
-import os
+import pathlib
+import shutil
 import sys
 
 import lxml.etree
@@ -7,42 +8,54 @@ import webview
 
 
 def resource(path):
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, path)
-
-    else:
-        return os.path.abspath(path)
-
-
-config_dir = os.path.expanduser("~/.characters")
-if not os.path.exists(config_dir):
-    os.mkdir(config_dir)
-
-if not os.path.exists(f"{config_dir}/config.json"):
-    theme = "themes/light.xsl"
-    with open(f"{config_dir}/config.json", "w+") as config_file:
-        json.dump(
-            {
-                "default_theme": theme,
-            },
-            config_file,
-        )
-
-else:
-    with open(f"{config_dir}/config.json", "r") as config_file:
-        config = json.load(config_file)
-        theme = config["default_theme"]
+    # resolve resource paths
+    return (
+        sys._MEIPASS / path
+        if hasattr(sys, "_MEIPASS")
+        else pathlib.Path(__file__).parent / path
+    )
 
 
-xslt = lxml.etree.parse(resource("style.xsl"))
-if os.path.exists(theme):
+def write_default():
+    # copy default themes
+    shutil.copytree(
+        pathlib.Path(__file__).parent / "bundled",
+        config_dir,
+        dirs_exist_ok=True,
+    )
+
+
+# ensure paths exist
+config_dir = pathlib.Path("~/.characters").expanduser()
+config_dir.mkdir(exist_ok=True)
+config_file = config_dir / "config.json"
+
+if not config_file.exists():
+    write_default()
+
+# read config
+with config_file.open() as fp:
+    config = json.load(fp)
+    theme = config_dir / pathlib.Path(config["default_theme"])
+
+
+xslt = lxml.etree.parse(resource("style.xsl").absolute())
+
+# load theme
+theme /= "theme.xsl"
+if theme.exists():
     imp = lxml.etree.Element(
-        "{http://www.w3.org/1999/XSL/Transform}import", {"href": theme}
+        "{http://www.w3.org/1999/XSL/Transform}import",
+        {"href": theme.absolute().as_uri()},
     )
     xslt.getroot().insert(1, imp)
 
 transformed = lxml.etree.XSLT(xslt)(lxml.etree.parse(sys.argv[1]))
-generated = lxml.etree.tostring(transformed, pretty_print=True).decode()
 
+# remove corrupted theme empty style tag otherwise wont render
+for style in transformed.xpath("//style[not(text())]"):
+    style.getparent().remove(style)
+
+generated = lxml.etree.tostring(transformed, pretty_print=True).decode()
 webview.create_window("Character Sheet", html=generated)
 webview.start()

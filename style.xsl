@@ -233,9 +233,7 @@
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<title>Character Sheet</title>
 				<style>&base_style;</style>
-				<style>
-					<xs:call-template name="theme" />
-				</style>
+				<xs:call-template name="theme" />
 			</head>
 			<body>
 				<div class="character-sheet">
