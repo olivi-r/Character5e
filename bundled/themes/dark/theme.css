@@ -1,0 +1,27 @@
+body {
+    background-color: #2c2c2c;
+}
+
+.character-sheet {
+    background-color: #333;
+}
+
+.box {
+    border-color: #584370;
+}
+
+.stat {
+    border-color: #43704b;
+}
+
+.stat-mod {
+    color: #43704b;
+}
+
+.box h2,
+.box h3,
+.base-stat,
+.save-mod,
+.skill-mod {
+    color: #AAA;
+}

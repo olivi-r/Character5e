@@ -36,8 +36,7 @@ body {
 .box {
     width: 100%;
     align-self: flex-start;
-    border-width: 2px;
-    border-style: solid;
+    border: 2px solid;
     border-radius: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -57,11 +56,10 @@ body {
 }
 
 .stat {
-    border-width: 2px;
-    border-style: solid;
+    border: 2px solid;
     border-radius: 10px;
-    padding: 10px;
     margin-bottom: 10px;
+    padding: 10px;
     position: relative;
     text-align: center;
 }
@@ -78,8 +76,7 @@ body {
 
 .saves {
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
 }
 
 .saves h3 {
@@ -103,14 +100,12 @@ body {
 }
 
 .skills {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
 }
 
 .skills h3 {
-    margin: 0;
     font-size: 0.75em;
-    margin-left: 10px;
+    margin: 0 10px;
 }
 
 .skill {
@@ -124,5 +119,10 @@ body {
     width: 1em;
     font-size: 0.75em;
     text-align: right;
-    margin-left: 10px;
+}
+
+.skill-stat {
+    margin-left: auto;
+    font-size: 0.5em;
+    text-align: right;
 }

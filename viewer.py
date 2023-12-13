@@ -57,4 +57,4 @@ for style in transformed.xpath("//style[not(text())]"):
 
 generated = lxml.etree.tostring(transformed, pretty_print=True).decode()
 webview.create_window("Character Sheet", html=generated)
-webview.start()
+webview.start(gui="qt")
