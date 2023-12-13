@@ -39,14 +39,13 @@ with config_file.open() as fp:
     theme = config_dir / pathlib.Path(config["default_theme"])
 
 
-xslt = lxml.etree.parse(resource("style.xsl").absolute())
+xslt = lxml.etree.parse(resource(pathlib.Path("style.xsl")).absolute())
 
 # load theme
 theme /= "theme.xsl"
 if theme.exists():
     imp = lxml.etree.Element(
-        "{http://www.w3.org/1999/XSL/Transform}import",
-        {"href": theme.absolute().as_uri()},
+        "{http://www.w3.org/1999/XSL/Transform}import", {"href": theme.as_uri()}
     )
     xslt.getroot().insert(1, imp)
 
