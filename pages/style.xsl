@@ -1,12 +1,5 @@
 <?xml version="1.0"?>
-
-<!-- CSS base stylesheet -->
-<!DOCTYPE xs:stylesheet [
-	<!ENTITY base_style SYSTEM "base.css">
-]>
-
 <xs:stylesheet version="1.0" xmlns:xs="http://www.w3.org/1999/XSL/Transform">
-	<xs:import href="none.xsl" />
 
 	<!-- Character stats -->
 	<xs:variable name="characterLevel" select="sum(/character/classes/class/@level)" />
@@ -349,11 +342,9 @@
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<title>Character Sheet</title>
-				<style>&base_style;</style>
-				<xs:call-template name="theme" />
 			</head>
 			<body>
-				<div class="character-sheet">
+				<div class="sheet">
 					<div class="header">
 						<h1>
 							<xs:value-of select="details/name" />

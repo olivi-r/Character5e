@@ -2,6 +2,7 @@ import json
 import pathlib
 import shutil
 import sys
+import threading
 
 import lxml.etree
 import webview
@@ -10,7 +11,7 @@ import webview
 def resource(path):
     # resolve resource paths
     return (
-        sys._MEIPASS / path
+        pathlib.Path(sys._MEIPASS) / path
         if hasattr(sys, "_MEIPASS")
         else pathlib.Path(__file__).parent / path
     )
@@ -25,36 +26,52 @@ def write_default():
     )
 
 
-# ensure paths exist
-config_dir = pathlib.Path("~/.characters").expanduser()
-config_dir.mkdir(exist_ok=True)
-config_file = config_dir / "config.json"
-
-if not config_file.exists():
-    write_default()
-
-# read config
-with config_file.open() as fp:
-    config = json.load(fp)
-    theme = config_dir / pathlib.Path(config["default_theme"])
+def load_sheet(file, *css):
+    # load xslt stylesheet
+    xslt = lxml.etree.parse(resource("pages/style.xsl").absolute())
+    transformed = lxml.etree.XSLT(xslt)(lxml.etree.parse(file))
+    transformed.xpath("/html/head")[0].extend(css)
+    return lxml.etree.tostring(transformed).decode()
 
 
-xslt = lxml.etree.parse(resource(pathlib.Path("style.xsl")).absolute())
+def load():
+    css = []
+    with resource("pages/base.css").open() as fp:
+        elem = lxml.etree.Element("style")
+        elem.text = fp.read()
+        css.append(elem)
 
-# load theme
-theme /= "theme.xsl"
-if theme.exists():
-    imp = lxml.etree.Element(
-        "{http://www.w3.org/1999/XSL/Transform}import", {"href": theme.as_uri()}
-    )
-    xslt.getroot().insert(1, imp)
+    if theme.exists():
+        with theme.open() as fp:
+            elem = lxml.etree.Element("style")
+            elem.text = fp.read()
+            css.append(elem)
 
-transformed = lxml.etree.XSLT(xslt)(lxml.etree.parse(sys.argv[1]))
+    try:
+        g = load_sheet(sys.argv[1], *css)
+        window.load_html(g)
 
-# remove corrupted theme empty style tag otherwise wont render
-for style in transformed.xpath("//style[not(text())]"):
-    style.getparent().remove(style)
+    except IndexError:
+        home = lxml.etree.parse(resource("pages/home.html").absolute())
+        home.xpath("/html/head")[0].extend(css)
+        window.load_html(lxml.etree.tostring(home).decode())
 
-generated = lxml.etree.tostring(transformed, pretty_print=True).decode()
-webview.create_window("Character Sheet", html=generated)
-webview.start(gui="qt")
+
+if __name__ == "__main__":
+    # ensure paths exist
+    config_dir = pathlib.Path("~/.characters").expanduser()
+    config_dir.mkdir(exist_ok=True)
+    config_file = config_dir / "config.json"
+
+    if not config_file.exists():
+        write_default()
+
+    # read config
+    with config_file.open() as fp:
+        config = json.load(fp)
+        theme = config_dir / pathlib.Path(config["theme"])
+
+    # create window
+    window = webview.create_window("Character Sheet Viewer")
+
+    webview.start(load)

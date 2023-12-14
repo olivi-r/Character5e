@@ -1,8 +1,8 @@
 body {
-    background-color: #2c2c2c;
+    background-color: #2C2C2C;
 }
 
-.character-sheet {
+.sheet {
     background-color: #333;
 }
 
@@ -22,6 +22,7 @@ body {
 .box h3,
 .base-stat,
 .save-mod,
-.skill-mod {
+.skill-mod,
+.skill-stat {
     color: #AAA;
 }

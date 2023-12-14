@@ -1,2 +1,2 @@
 lxml
-pywebview[qt]
+pywebview
