@@ -5,27 +5,24 @@ body {
 }
 
 .sheet {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.column,
+.header,
+.main-content {
+    display: flex;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 20px;
 }
 
-.header h1,
-.header p {
+.header h1 {
     margin: 0.3em;
-}
-
-.main-content,
-.column {
-    display: flex;
 }
 
 .column {
@@ -34,34 +31,36 @@ body {
 }
 
 .box {
-    width: 100%;
-    align-self: flex-start;
     border: 2px solid;
     border-radius: 10px;
     margin-bottom: 10px;
     text-align: center;
+    width: 100%;
 }
 
 .box h2 {
     font-size: 1em;
 }
 
-.stats {
+.box-content {
     margin: 10px;
 }
 
-.stats h3 {
-    margin: 0;
-    font-size: 0.6em;
+.box-content h3 {
+    font-size: 0.75em;
+    margin: 0 10px;
 }
 
-.stat {
+.sub-box {
     border: 2px solid;
     border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    position: relative;
-    text-align: center;
+    margin: 10px;
+    padding: 5px;
+}
+
+.stats h3 {
+    font-size: 0.6em;
+    margin: 0;
 }
 
 .stat-mod {
@@ -74,55 +73,23 @@ body {
     margin-top: 5px;
 }
 
-.saves {
-    text-align: center;
-    margin: 5px;
-}
-
-.saves h3 {
-    margin: 0;
-    font-size: 0.75em;
-    margin-left: 10px;
-}
-
-.save {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    margin-right: 10px;
-}
-
-.save-mod {
-    width: 1em;
-    font-size: 0.75em;
-    text-align: right;
-    margin-left: 10px;
-}
-
-.skills {
-    margin: 5px;
-}
-
-.skills h3 {
-    font-size: 0.75em;
-    margin: 0 10px;
-}
-
+.save,
 .skill {
     display: flex;
-    align-items: center;
     margin-bottom: 5px;
     margin-right: 10px;
 }
 
+.save-mod,
 .skill-mod {
-    width: 1em;
     font-size: 0.75em;
+    margin-left: 10px;
     text-align: right;
+    width: 1em;
 }
 
 .skill-stat {
-    margin-left: auto;
     font-size: 0.5em;
+    margin-left: auto;
     text-align: right;
 }

@@ -10,7 +10,7 @@ body {
     border-color: #584370;
 }
 
-.stat {
+.sub-box {
     border-color: #43704b;
 }
 
@@ -18,9 +18,9 @@ body {
     color: #43704b;
 }
 
+.base-stat,
 .box h2,
 .box h3,
-.base-stat,
 .save-mod,
 .skill-mod,
 .skill-stat {

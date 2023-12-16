@@ -334,7 +334,6 @@
 		</xs:call-template>
 	</xs:variable>
 
-
 	<!-- Output html document -->
 	<xs:template match="/character">
 		<html lang="en">
@@ -356,55 +355,55 @@
 
 								<!-- Ability scores and modifiers -->
 								<div class="stats">
-									<div class="stat">
+									<div class="sub-box stat">
 										<h3>Strength</h3>
 										<div class="stat-mod">
-											<xs:value-of select="$str" />
+											<xs:value-of select="concat(substring('+', 1, number($str >= 0) * 1), $str)" />
 										</div>
 										<div class="base-stat">
 											<xs:value-of select="$baseStr" />
 										</div>
 									</div>
-									<div class="stat">
+									<div class="sub-box stat">
 										<h3>Dexterity</h3>
 										<div class="stat-mod">
-											<xs:value-of select="$dex" />
+											<xs:value-of select="concat(substring('+', 1, number($dex >= 0) * 1), $dex)" />
 										</div>
 										<div class="base-stat">
 											<xs:value-of select="$baseDex" />
 										</div>
 									</div>
-									<div class="stat">
+									<div class="sub-box stat">
 										<h3>Constitution</h3>
 										<div class="stat-mod">
-											<xs:value-of select="$con" />
+											<xs:value-of select="concat(substring('+', 1, number($con >= 0) * 1), $con)" />
 										</div>
 										<div class="base-stat">
 											<xs:value-of select="$baseCon" />
 										</div>
 									</div>
-									<div class="stat">
+									<div class="sub-box stat">
 										<h3>Intelligence</h3>
 										<div class="stat-mod">
-											<xs:value-of select="$int" />
+											<xs:value-of select="concat(substring('+', 1, number($int >= 0) * 1), $int)" />
 										</div>
 										<div class="base-stat">
 											<xs:value-of select="$baseInt" />
 										</div>
 									</div>
-									<div class="stat">
+									<div class="sub-box stat">
 										<h3>Wisdom</h3>
 										<div class="stat-mod">
-											<xs:value-of select="$wis" />
+											<xs:value-of select="concat(substring('+', 1, number($wis >= 0) * 1), $wis)" />
 										</div>
 										<div class="base-stat">
 											<xs:value-of select="$baseWis" />
 										</div>
 									</div>
-									<div class="stat">
+									<div class="sub-box stat">
 										<h3>Charisma</h3>
 										<div class="stat-mod">
-											<xs:value-of select="$cha" />
+											<xs:value-of select="concat(substring('+', 1, number($cha >= 0) * 1), $cha)" />
 										</div>
 										<div class="base-stat">
 											<xs:value-of select="$baseCha" />
@@ -416,42 +415,42 @@
 						<div class="column">
 							<div class="box">
 								<h2>Saving Throws</h2>
-								<div class="saves">
+								<div class="box-content saves">
 
 									<!-- Saving throw modifiers -->
 									<div class="save">
 										<div class="save-mod">
-											<xs:value-of select="$strSave" />
+											<xs:value-of select="concat(substring('+', 1, number($strSave >= 0) * 1), $strSave)" />
 										</div>
 										<h3>Strength</h3>
 									</div>
 									<div class="save">
 										<div class="save-mod">
-											<xs:value-of select="$dexSave" />
+											<xs:value-of select="concat(substring('+', 1, number($dexSave >= 0) * 1), $dexSave)" />
 										</div>
 										<h3>Dexterity</h3>
 									</div>
 									<div class="save">
 										<div class="save-mod">
-											<xs:value-of select="$conSave" />
+											<xs:value-of select="concat(substring('+', 1, number($conSave >= 0) * 1), $conSave)" />
 										</div>
 										<h3>Constitution</h3>
 									</div>
 									<div class="save">
 										<div class="save-mod">
-											<xs:value-of select="$intSave" />
+											<xs:value-of select="concat(substring('+', 1, number($intSave >= 0) * 1), $intSave)" />
 										</div>
 										<h3>Intelligence</h3>
 									</div>
 									<div class="save">
 										<div class="save-mod">
-											<xs:value-of select="$wisSave" />
+											<xs:value-of select="concat(substring('+', 1, number($wisSave >= 0) * 1), $wisSave)" />
 										</div>
 										<h3>Wisdom</h3>
 									</div>
 									<div class="save">
 										<div class="save-mod">
-											<xs:value-of select="$chaSave" />
+											<xs:value-of select="concat(substring('+', 1, number($chaSave >= 0) * 1), $chaSave)" />
 										</div>
 										<h3>Charisma</h3>
 									</div>
@@ -459,135 +458,145 @@
 							</div>
 							<div class="box">
 								<h2>Skills</h2>
-								<div class="skills">
+								<div class="box-content skills">
 
 									<!-- Skill modifiers -->
 									<div class="skill" title="{$dex} (dex){$acrobaticsTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$acrobatics" />
+											<xs:value-of select="concat(substring('+', 1, number($acrobatics >= 0) * 1), $acrobatics)" />
 										</div>
 										<h3>Acrobatics</h3>
 										<div class="skill-stat">Dex</div>
 									</div>
 									<div class="skill" title="{$wis} (wis){$animalHandlingTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$animalHandling" />
+											<xs:value-of select="concat(substring('+', 1, number($animalHandling >= 0) * 1), $animalHandling)" />
 										</div>
 										<h3>Animal Handling</h3>
 										<div class="skill-stat">Wis</div>
 									</div>
 									<div class="skill" title="{$int} (int){$arcanaTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$arcana" />
+											<xs:value-of select="concat(substring('+', 1, number($arcana >= 0) * 1), $arcana)" />
 										</div>
 										<h3>Arcana</h3>
 										<div class="skill-stat">Int</div>
 									</div>
 									<div class="skill" title="{$str} (str){$athleticsTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$athletics" />
+											<xs:value-of select="concat(substring('+', 1, number($athletics >= 0) * 1), $athletics)" />
 										</div>
 										<h3>Athletics</h3>
 										<div class="skill-stat">Str</div>
 									</div>
 									<div class="skill" title="{$cha} (cha){$deceptionTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$deception" />
+											<xs:value-of select="concat(substring('+', 1, number($deception >= 0) * 1), $deception)" />
 										</div>
 										<h3>Deception</h3>
 										<div class="skill-stat">Cha</div>
 									</div>
 									<div class="skill" title="{$int} (int){$historyTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$history" />
+											<xs:value-of select="concat(substring('+', 1, number($history >= 0) * 1), $history)" />
 										</div>
 										<h3>History</h3>
 										<div class="skill-stat">Int</div>
 									</div>
 									<div class="skill" title="{$wis} (wis){$insightTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$insight" />
+											<xs:value-of select="concat(substring('+', 1, number($insight >= 0) * 1), $insight)" />
 										</div>
 										<h3>Insight</h3>
 										<div class="skill-stat">Wis</div>
 									</div>
 									<div class="skill" title="{$cha} (cha){$intimidationTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$intimidation" />
+											<xs:value-of select="concat(substring('+', 1, number($intimidation >= 0) * 1), $intimidation)" />
 										</div>
 										<h3>Intimidation</h3>
 										<div class="skill-stat">Cha</div>
 									</div>
 									<div class="skill" title="{$int} (int){$investigationTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$investigation" />
+											<xs:value-of select="concat(substring('+', 1, number($investigation >= 0) * 1), $investigation)" />
 										</div>
 										<h3>Investigation</h3>
 										<div class="skill-stat">Int</div>
 									</div>
 									<div class="skill" title="{$wis} (wis){$medicineTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$medicine" />
+											<xs:value-of select="concat(substring('+', 1, number($medicine >= 0) * 1), $medicine)" />
 										</div>
 										<h3>Medicine</h3>
 										<div class="skill-stat">Wis</div>
 									</div>
 									<div class="skill" title="{$int} (int){$natureTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$nature" />
+											<xs:value-of select="concat(substring('+', 1, number($nature >= 0) * 1), $nature)" />
 										</div>
 										<h3>Nature</h3>
 										<div class="skill-stat">Int</div>
 									</div>
 									<div class="skill" title="{$wis} (wis){$perceptionTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$perception" />
+											<xs:value-of select="concat(substring('+', 1, number($perception >= 0) * 1), $perception)" />
 										</div>
 										<h3>Perception</h3>
 										<div class="skill-stat">Wis</div>
 									</div>
 									<div class="skill" title="{$cha} (cha){$performanceTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$performance" />
+											<xs:value-of select="concat(substring('+', 1, number($performance >= 0) * 1), $performance)" />
 										</div>
 										<h3>Performance</h3>
 										<div class="skill-stat">Cha</div>
 									</div>
 									<div class="skill" title="{$cha} (cha){$persuasionTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$persuasion" />
+											<xs:value-of select="concat(substring('+', 1, number($persuasion >= 0) * 1), $persuasion)" />
 										</div>
 										<h3>Persuasion</h3>
 										<div class="skill-stat">Cha</div>
 									</div>
 									<div class="skill" title="{$int} (int){$religionTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$religion" />
+											<xs:value-of select="concat(substring('+', 1, number($religion >= 0) * 1), $religion)" />
 										</div>
 										<h3>Religion</h3>
 										<div class="skill-stat">Int</div>
 									</div>
 									<div class="skill" title="{$dex} (dex){$sleightOfHandTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$sleightOfHand" />
+											<xs:value-of select="concat(substring('+', 1, number($sleightOfHand >= 0) * 1), $sleightOfHand)" />
 										</div>
 										<h3>Sleight of Hand</h3>
 										<div class="skill-stat">Dex</div>
 									</div>
 									<div class="skill" title="{$dex} (dex){$stealthTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$stealth" />
+											<xs:value-of select="concat(substring('+', 1, number($stealth >= 0) * 1), $stealth)" />
 										</div>
 										<h3>Stealth</h3>
 										<div class="skill-stat">Dex</div>
 									</div>
 									<div class="skill" title="{$wis} (wis){$survivalTip}">
 										<div class="skill-mod">
-											<xs:value-of select="$survival" />
+											<xs:value-of select="concat(substring('+', 1, number($survival >= 0) * 1), $survival)" />
 										</div>
 										<h3>Survival</h3>
 										<div class="skill-stat">Wis</div>
 									</div>
+								</div>
+							</div>
+						</div>
+						<div class="column">
+							<div class="box">
+								<h2>Class<xs:value-of select="substring('es', 1, number(count(classes/class) > 1) * 2)" /></h2>
+								<div class="box-content">
+									<xs:for-each select="classes/class">
+										<h3><xs:value-of select="@name" /> level <xs:value-of select="@level" /></h3>
+									</xs:for-each>
 								</div>
 							</div>
 						</div>

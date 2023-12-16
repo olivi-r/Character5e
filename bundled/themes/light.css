@@ -2,7 +2,7 @@ body {
     background-color: #f2f2f2;
 }
 
-.character-sheet {
+.sheet {
     background-color: #fff;
 }
 
@@ -10,7 +10,7 @@ body {
     border-color: #00CBFF;
 }
 
-.stat {
+.sub-box {
     border-color: #4CAF50;
 }
 
