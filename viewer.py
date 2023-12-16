@@ -2,7 +2,6 @@ import json
 import pathlib
 import shutil
 import sys
-import threading
 
 import lxml.etree
 import webview
