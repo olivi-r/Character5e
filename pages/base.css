@@ -40,6 +40,7 @@ body {
 
 .box h2 {
     font-size: 1em;
+    margin: 10px;
 }
 
 .box-content {
@@ -49,6 +50,10 @@ body {
 .box-content h3 {
     font-size: 0.75em;
     margin: 0 10px;
+}
+
+.box-content svg {
+    margin: auto;
 }
 
 .sub-box {

@@ -7,8 +7,18 @@ import lxml.etree
 import webview
 
 
+class Api:
+    def open_sheet_dialog(self):
+        opened = window.create_file_dialog(
+            webview.OPEN_DIALOG,
+            file_types=("Character sheet (*.sheet;*.xml)", "All files (*.*)"),
+        )
+        if opened is not None:
+            window.load_html(load_sheet(opened[0], *load_css()))
+
+
 def resource(path):
-    # resolve resource paths
+    # resolve resource paths when frozen
     return (
         pathlib.Path(sys._MEIPASS) / path
         if hasattr(sys, "_MEIPASS")
@@ -33,7 +43,7 @@ def load_sheet(file, *css):
     return lxml.etree.tostring(transformed).decode()
 
 
-def load():
+def load_css():
     css = []
     with resource("pages/base.css").open() as fp:
         elem = lxml.etree.Element("style")
@@ -46,9 +56,13 @@ def load():
             elem.text = fp.read()
             css.append(elem)
 
+    return css
+
+
+def load():
+    css = load_css()
     try:
-        g = load_sheet(sys.argv[1], *css)
-        window.load_html(g)
+        window.load_html(load_sheet(sys.argv[1], *css))
 
     except IndexError:
         home = lxml.etree.parse(resource("pages/home.html").absolute())
@@ -71,6 +85,5 @@ if __name__ == "__main__":
         theme = config_dir / pathlib.Path(config["theme"])
 
     # create window
-    window = webview.create_window("Character Sheet Viewer")
-
+    window = webview.create_window("Character Sheet Viewer", js_api=Api())
     webview.start(load)
