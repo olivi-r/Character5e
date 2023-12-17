@@ -52,8 +52,13 @@ body {
     margin: 0 10px;
 }
 
+.box-content:has(svg) {
+    width: 256px;
+}
+
 .box-content svg {
-    margin: auto;
+    height: 100px;
+    max-height: 35%;
 }
 
 .sub-box {
